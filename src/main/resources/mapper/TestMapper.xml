@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.developerleetaehee.th_web_app.mapper.TestMapper">
+    <resultMap id="BoardResultMap" type="Board">
+        <id property="idx" column="idx"/>
+        <result property="writer" column="writer"/>
+        <result property="subject" column="subject"/>
+        <result property="content" column="content"/>
+        <result property="writeDate" column="write_date"/>
+        <result property="registerDatetime" column="register_datetime"/>
+        <result property="updateDatetime" column="update_datetime"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="deleteDatetime" column="delete_datetime"/>
+        <result property="deleteUser" column="delete_user"/>
+    </resultMap>
+
+    <select id="findAll"
+            resultMap="BoardResultMap"
+            parameterType="com.developerleetaehee.th_web_app.dto.PageRequest">
+        SELECT `idx`,
+               `writer`,
+               `subject`,
+               `content`,
+               `write_date`,
+               `register_datetime`
+        FROM `th_board`
+        WHERE `delete_datetime` IS NULL
+        ORDER BY `idx` DESC
+        LIMIT #{startPage}, #{perPage}
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="BoardResultMap">
+        SELECT `idx`,
+               `writer`,
+               `subject`,
+               `content`,
+               `write_date`,
+               `register_datetime`
+        FROM `th_board`
+        WHERE `idx` = #{idx}
+        AND `delete_datetime` IS NULL
+    </select>
+
+    <insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="idx">
+        INSERT INTO `th_board` SET
+            `writer` = #{writer},
+            `subject` = #{subject},
+            `content` = #{content},
+            `write_date` = #{writeDate}
+    </insert>
+
+    <update id="update" parameterType="Board">
+        UPDATE `th_board` SET
+            `writer` = #{writer},
+            `subject` = #{subject},
+            `content` = #{content},
+            `update_datetime` = NOW(),
+            `update_user` = #{updateUser}
+        WHERE `idx` = #{idx}
+    </update>
+
+    <update id="softDelete" parameterType="Board">
+        UPDATE `th_board` SET
+            `delete_datetime` = NOW(),
+            `delete_user` = #{deleteUser}
+        WHERE `idx` = #{idx}
+    </update>
+
+    <delete id="delete" parameterType="Board">
+        DELETE FROM `th_board` WHERE `idx` = #{idx}
+    </delete>
+
+</mapper>

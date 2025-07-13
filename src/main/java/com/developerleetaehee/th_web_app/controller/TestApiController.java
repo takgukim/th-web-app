@@ -1,0 +1,77 @@
+package com.developerleetaehee.th_web_app.controller;
+
+import com.developerleetaehee.th_web_app.domain.Board;
+import com.developerleetaehee.th_web_app.dto.BoardResponse;
+import com.developerleetaehee.th_web_app.service.TestService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/tests")
+public class TestApiController {
+    private final TestService testService;
+
+    @GetMapping
+    public ResponseEntity<List<BoardResponse>> findAllBoard(
+            @RequestParam(name = "start_page", defaultValue = "0") int startPage,
+            @RequestParam(name = "per_page", defaultValue = "10") int perPage
+    ) {
+        List<BoardResponse> boards =  testService.findAll(startPage, perPage)
+                .stream()
+                .map(BoardResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(boards);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardResponse> getBoard(@PathVariable long id) {
+        Board board = testService.findById(id);
+
+        return ResponseEntity.ok()
+                .body(new BoardResponse(board));
+    }
+
+    @PostMapping
+    public ResponseEntity<BoardResponse> addBoard(@RequestBody Board request) {
+        Board board = testService.save(request);
+
+        return ResponseEntity.ok()
+                .body(new BoardResponse(board));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BoardResponse> updateBoard(
+            @PathVariable Long id,
+            @RequestBody Board request) {
+
+        Board board = testService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(new BoardResponse(board));
+    }
+
+    @PatchMapping("/{id}/soft-delete")
+    public ResponseEntity<Void> softDeleteBoard(
+            @PathVariable long id,
+            @RequestBody Board request) {
+
+        testService.softDelete(id, request);
+
+        return ResponseEntity.ok()
+                .build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBoard(@PathVariable long id) {
+        testService.delete(id);
+
+        return ResponseEntity.ok()
+                .build();
+    }
+}
