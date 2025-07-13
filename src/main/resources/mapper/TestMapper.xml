@@ -9,6 +9,7 @@
         <result property="writer" column="writer"/>
         <result property="subject" column="subject"/>
         <result property="content" column="content"/>
+        <result property="ipAddress" column="ip_address"/>
         <result property="writeDate" column="write_date"/>
         <result property="registerDatetime" column="register_datetime"/>
         <result property="updateDatetime" column="update_datetime"/>
@@ -49,6 +50,7 @@
             `writer` = #{writer},
             `subject` = #{subject},
             `content` = #{content},
+            `ip_address` = #{ipAddress},
             `write_date` = #{writeDate}
     </insert>
 

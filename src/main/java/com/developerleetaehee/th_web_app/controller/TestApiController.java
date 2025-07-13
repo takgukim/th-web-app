@@ -3,6 +3,7 @@ package com.developerleetaehee.th_web_app.controller;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.BoardResponse;
 import com.developerleetaehee.th_web_app.service.TestService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,12 @@ public class TestApiController {
     }
 
     @PostMapping
-    public ResponseEntity<BoardResponse> addBoard(@RequestBody Board request) {
+    public ResponseEntity<BoardResponse> addBoard(
+            @RequestBody Board request,
+            HttpServletRequest httpRequest) {
+
+        request.setIpAddress(this.getRealIp(httpRequest));
+
         Board board = testService.save(request);
 
         return ResponseEntity.ok()
@@ -73,5 +79,21 @@ public class TestApiController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    private String getRealIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
+            return ip.split(",")[0];
+        }
+        ip = request.getHeader("Proxy-Client-IP");
+        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+        ip = request.getHeader("WL-Proxy-Client-IP");
+        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+        return request.getRemoteAddr();
     }
 }

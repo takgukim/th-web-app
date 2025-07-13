@@ -30,6 +30,9 @@ public class Board {
     @Column(name = "write_date", nullable = false, updatable = false, length = 8)
     private String writeDate;
 
+    @Column(name = "ip_address", length = 45)
+    private String ipAddress;
+
     @Column(name = "register_datetime", nullable = false, updatable = false)
     private LocalDateTime registerDatetime;
 
@@ -54,10 +57,11 @@ public class Board {
     }
 
     @Builder
-    public Board(String writer, String subject, String content) {
+    public Board(String writer, String subject, String content, String ipAddress) {
         this.writer = writer;
         this.subject = subject;
         this.content = content;
+        this.ipAddress = ipAddress;
     }
 
     @PrePersist

@@ -25,6 +25,7 @@ logging:
     org.hibernate.type: trace  # 쿼리 파라미터 값도 보여줌 (디버깅용)
 
 server:
+  address: 0.0.0.0
   port: 8080
 
 mybatis:
