@@ -4,6 +4,8 @@ import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.BoardResponse;
 import com.developerleetaehee.th_web_app.service.TestService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/tests")
+@Tag(name = "mybatis 샘플 예제 API", description = "mybatis 샘플 CRUD 소스 참고 바랍니다.")
 public class TestApiController {
     private final TestService testService;
 
     @GetMapping
+    @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
     public ResponseEntity<List<BoardResponse>> findAllBoard(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
             @RequestParam(name = "per_page", defaultValue = "10") int perPage
@@ -32,6 +36,7 @@ public class TestApiController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "특정 게시글 조회", description = "고유정보로 게시글을 조회합니다.")
     public ResponseEntity<BoardResponse> getBoard(@PathVariable long id) {
         Board board = testService.findById(id);
 
@@ -40,6 +45,7 @@ public class TestApiController {
     }
 
     @PostMapping
+    @Operation(summary = "게시글 생성", description = "게시글을 신규로 생성합니다.")
     public ResponseEntity<BoardResponse> addBoard(
             @RequestBody Board request,
             HttpServletRequest httpRequest) {
@@ -53,6 +59,7 @@ public class TestApiController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "게시글 수정", description = "특정 게시글을 수정합니다.")
     public ResponseEntity<BoardResponse> updateBoard(
             @PathVariable Long id,
             @RequestBody Board request) {
@@ -64,6 +71,7 @@ public class TestApiController {
     }
 
     @PatchMapping("/{id}/soft-delete")
+    @Operation(summary = "게시글 소프트 삭제", description = "특정 데이터를 테이블에서 지우지 않고 플래그로 처리합니다.")
     public ResponseEntity<Void> softDeleteBoard(
             @PathVariable long id,
             @RequestBody Board request) {
@@ -75,6 +83,7 @@ public class TestApiController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "게시글 삭제", description = "특정 게시글을 테이블에서 삭제한다.")
     public ResponseEntity<Void> deleteBoard(@PathVariable long id) {
         testService.delete(id);
 

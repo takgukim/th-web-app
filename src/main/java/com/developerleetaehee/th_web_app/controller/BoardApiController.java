@@ -7,6 +7,8 @@ import com.developerleetaehee.th_web_app.dto.DeleteBoardRequest;
 import com.developerleetaehee.th_web_app.dto.UpdateBoardRequest;
 import com.developerleetaehee.th_web_app.service.BoardService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/boards")
+@Tag(name = "홈페이지 게시글 API", description = "홈페이지에 게시글 CRUD 처리를 위한 API")
 public class BoardApiController {
     private final BoardService boardService;
 
     @GetMapping
+    @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
     public ResponseEntity<List<BoardResponse>> findAllBoards(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
             @RequestParam(name = "per_page", defaultValue = "10") int perPage
@@ -36,6 +40,7 @@ public class BoardApiController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "특정 게시글 조회", description = "고유정보로 게시글을 조회합니다.")
     public ResponseEntity<BoardResponse> findBoard(@PathVariable long id) {
         Board board = boardService.findById(id);
 
@@ -44,6 +49,7 @@ public class BoardApiController {
     }
 
     @PostMapping
+    @Operation(summary = "게시글 생성", description = "게시글을 신규로 생성합니다.")
     public ResponseEntity<BoardResponse> addBoard(
             @RequestBody AddBoardRequest request,
             HttpServletRequest httpRequest) {
@@ -57,6 +63,7 @@ public class BoardApiController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "게시글 수정", description = "특정 게시글을 수정합니다.")
     public ResponseEntity<BoardResponse> updateBoard(
             @PathVariable long id,
             @RequestBody UpdateBoardRequest request) {
@@ -68,6 +75,7 @@ public class BoardApiController {
     }
 
     @PatchMapping("/{id}/soft-delete")
+    @Operation(summary = "게시글 소프트 삭제", description = "특정 데이터를 테이블에서 지우지 않고 플래그로 처리합니다.")
     public ResponseEntity<Void> softDeleteBoard(
             @PathVariable long id,
             @RequestBody DeleteBoardRequest request) {
@@ -79,6 +87,7 @@ public class BoardApiController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "게시글 삭제", description = "특정 게시글을 테이블에서 삭제한다.")
     public ResponseEntity<Void> deleteBoard(@PathVariable long id) {
         boardService.delete(id);
 
