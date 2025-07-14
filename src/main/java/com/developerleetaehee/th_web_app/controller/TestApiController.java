@@ -3,6 +3,7 @@ package com.developerleetaehee.th_web_app.controller;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.BoardResponse;
 import com.developerleetaehee.th_web_app.service.TestService;
+import com.developerleetaehee.th_web_app.utility.IpUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class TestApiController {
             @RequestBody Board request,
             HttpServletRequest httpRequest) {
 
-        request.setIpAddress(this.getRealIp(httpRequest));
+        request.setIpAddress(IpUtil.getRealIp(httpRequest));
 
         Board board = testService.save(request);
 

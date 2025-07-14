@@ -6,6 +6,7 @@ import com.developerleetaehee.th_web_app.dto.BoardResponse;
 import com.developerleetaehee.th_web_app.dto.DeleteBoardRequest;
 import com.developerleetaehee.th_web_app.dto.UpdateBoardRequest;
 import com.developerleetaehee.th_web_app.service.BoardService;
+import com.developerleetaehee.th_web_app.utility.IpUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,7 +48,7 @@ public class BoardApiController {
             @RequestBody AddBoardRequest request,
             HttpServletRequest httpRequest) {
 
-        request.setIpAddress(this.getRealIp(httpRequest));
+        request.setIpAddress(IpUtil.getRealIp(httpRequest));
 
         Board savedBoard = boardService.save(request);
 
@@ -83,21 +84,5 @@ public class BoardApiController {
 
         return ResponseEntity.ok()
                 .build();
-    }
-
-    private String getRealIp(HttpServletRequest request) {
-        String ip = request.getHeader("X-Forwarded-For");
-        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
-            return ip.split(",")[0];
-        }
-        ip = request.getHeader("Proxy-Client-IP");
-        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
-            return ip;
-        }
-        ip = request.getHeader("WL-Proxy-Client-IP");
-        if (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
-            return ip;
-        }
-        return request.getRemoteAddr();
     }
 }
