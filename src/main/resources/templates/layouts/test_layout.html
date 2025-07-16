@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}"></title>
+</head>
+<body>
+
+<!-- 헤더 인클루드 -->
+<div th:replace="fragments/test/header :: headerFragment"></div>
+
+<!-- 각 페이지가 들어갈 부분 -->
+<main>
+  <div th:replace="test/test :: content"></div>
+</main>
+
+<!-- 푸터 인클루드 -->
+<div th:replace="fragments/test/footer :: footerFragment"></div>
+
+</body>
+</html>

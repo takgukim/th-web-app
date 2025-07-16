@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <!--<title layout:title-pattern="$CONTENT - 내사이트">레이아웃 기본제목</title>-->
+    <title th:text="${pageTitle} ?: '내사이트 기본제목'">내사이트 기본제목</title>
+</head>
+<body>
+
+<!-- 헤더 include -->
+<div th:replace="fragments/test/dialect_header :: headerFragment"></div>
+
+<!-- 개별 페이지에서 이 부분에 끼워넣는다 -->
+<div layout:fragment="content">
+</div>
+
+<!-- 풋터 include -->
+<div th:replace="fragments/test/dialect_footer :: footerFragment"></div>
+
+</body>
+</html>
