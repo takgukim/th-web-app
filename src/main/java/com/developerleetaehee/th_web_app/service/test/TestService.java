@@ -1,7 +1,6 @@
-package com.developerleetaehee.th_web_app.service;
+package com.developerleetaehee.th_web_app.service.test;
 
 import com.developerleetaehee.th_web_app.domain.Board;
-import com.developerleetaehee.th_web_app.dto.AddBoardRequest;
 import com.developerleetaehee.th_web_app.dto.PageRequest;
 import com.developerleetaehee.th_web_app.mapper.TestMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
-package com.developerleetaehee.th_web_app.service;
+package com.developerleetaehee.th_web_app.service.boarf;
 
 import com.developerleetaehee.th_web_app.domain.Board;
-import com.developerleetaehee.th_web_app.dto.AddBoardRequest;
-import com.developerleetaehee.th_web_app.dto.DeleteBoardRequest;
-import com.developerleetaehee.th_web_app.dto.UpdateBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
 import com.developerleetaehee.th_web_app.repository.BoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

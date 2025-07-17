@@ -1,8 +1,8 @@
-package com.developerleetaehee.th_web_app.controller;
+package com.developerleetaehee.th_web_app.controller.test;
 
 import com.developerleetaehee.th_web_app.domain.Board;
-import com.developerleetaehee.th_web_app.dto.BoardResponse;
-import com.developerleetaehee.th_web_app.service.TestService;
+import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
+import com.developerleetaehee.th_web_app.service.test.TestService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

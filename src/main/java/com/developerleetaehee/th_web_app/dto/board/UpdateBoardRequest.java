@@ -1,4 +1,4 @@
-package com.developerleetaehee.th_web_app.dto;
+package com.developerleetaehee.th_web_app.dto.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

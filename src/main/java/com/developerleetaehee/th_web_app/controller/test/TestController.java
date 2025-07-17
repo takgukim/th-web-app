@@ -1,6 +1,6 @@
-package com.developerleetaehee.th_web_app.controller;
+package com.developerleetaehee.th_web_app.controller.test;
 
-import com.developerleetaehee.th_web_app.service.TestService;
+import com.developerleetaehee.th_web_app.service.test.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
