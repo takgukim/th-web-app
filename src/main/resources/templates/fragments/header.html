@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark" th:fragment="header">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">티에이치 쇼핑몰</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!-- 소개 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">소개</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">회사소개</a></li>
+                        <li><a class="dropdown-item" href="#">연혁</a></li>
+                        <li><a class="dropdown-item" href="#">찾아오는길</a></li>
+                    </ul>
+                </li>
+                <!-- 상품몰 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">상품몰</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">가전제품</a></li>
+                        <li><a class="dropdown-item" href="#">의류</a></li>
+                        <li><a class="dropdown-item" href="#">성인전용</a></li>
+                        <li><a class="dropdown-item" href="#">거래</a></li>
+                    </ul>
+                </li>
+                <!-- 이벤트 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">이벤트</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">무료이벤트</a></li>
+                        <li><a class="dropdown-item" href="#">할인이벤트</a></li>
+                        <li><a class="dropdown-item" href="#">후기이벤트</a></li>
+                    </ul>
+                </li>
+                <!-- 커뮤니티 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">커뮤니티</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">공지사항</a></li>
+                        <li><a class="dropdown-item" href="#">자유게시판</a></li>
+                        <li><a class="dropdown-item" href="#">질의응답</a></li>
+                        <li><a class="dropdown-item" href="#">입점신청</a></li>
+                    </ul>
+                </li>
+
+                <!-- PC용 로그인 아이콘 -->
+                <li class="nav-item d-none d-lg-block ms-3">
+                    <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        🔑 로그인
+                    </button>
+                </li>
+            </ul>
+
+            <!-- 모바일에서 로그인 버튼 -->
+            <div class="d-lg-none mt-3">
+                <button class="btn btn-outline-light w-100" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    🔑 로그인
+                </button>
+            </div>
+
+        </div>
+    </div>
+</nav>

@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <!--<title layout:title-pattern="$CONTENT - 내사이트">레이아웃 기본제목</title>-->
-    <title th:text="${pageTitle} ?: '내사이트 기본제목'">내사이트 기본제목</title>
+    <title th:text="${title} != null ? '내사이트 기본제목 | ' + ${title} : '내사이트 기본제목'">
+        내사이트 기본제목
+    </title>
+
 </head>
 <body>
 

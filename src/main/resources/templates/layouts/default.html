@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title th:text="${title} != null ? '내사이트 기본제목 | ' + ${title} : '내사이트 기본제목'"></title>
+
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/css/common.css}" rel="stylesheet">
+    </head>
+    <body>
+
+        <!-- 메뉴 헤더 영역 -->
+        <nav th:replace="fragments/header :: header"></nav>
+
+        <!-- 메인 콘덴츠 -->
+        <div layout:fragment="content"></div>
+
+        <!-- 풋터 -->
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/default}"
+     layout:fragment="content">
+
+    <!-- 슬라이드 -->
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" style="margin-top:56px;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/id/1018/1600/800" alt="">
+                <div class="carousel-caption">
+                    <h1>티에이치 쇼핑몰</h1>
+                    <p>최고의 상품과 서비스를 제공합니다.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1025/1600/800" alt="">
+                <div class="carousel-caption">
+                    <h1>고객만족!</h1>
+                    <p>고객을 최우선으로 만족합니다.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1039/1600/800" alt="">
+                <div class="carousel-caption">
+                    <h1>티에이치 쇼핑몰</h1>
+                    <p>다양한 연령대와 다양한 상품을 팔아요.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1041/1600/800" alt="">
+                <div class="carousel-caption">
+                    <h1>티에이치 쇼핑몰</h1>
+                    <p>빠른배송! 새벽배송 제공해요.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/id/1043/1600/800" alt="">
+                <div class="carousel-caption">
+                    <h1>티에이치 쇼핑몰</h1>
+                    <p>배송은 무료! 제품은 저렴
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>

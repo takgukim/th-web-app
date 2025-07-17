@@ -15,12 +15,12 @@ public class TestController {
     @GetMapping("/test_layout")
     public String test(Model model) {
         model.addAttribute("title", "홈");
-        return "layouts/test_layout";
+        return "layouts/test/test_layout";
     }
 
     @GetMapping("/test_dialect")
     public String testDialect(Model model) {
-        model.addAttribute("pageTitle", "홈");
+        model.addAttribute("title", "홈");
         return "test/dialect";
     }
 }
