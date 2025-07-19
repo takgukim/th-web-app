@@ -31,3 +31,10 @@ server:
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
   type-aliases-package: com.developerleetaehee.th_web_app.domain
+
+#네이버 지도 API 연동 정보
+naver:
+  map:
+    client-id: ${NAVER_MAP_CLIENT_ID}
+    company-lat: ${NAVER_MAP_LAT}
+    company-lng: ${NAVER_MAP_LNG}

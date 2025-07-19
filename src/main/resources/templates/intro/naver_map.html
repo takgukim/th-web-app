@@ -1,0 +1,59 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/default}"
+     layout:fragment="content">
+
+    <div class="main-hero">
+        <img src="https://picsum.photos/id/1018/1600/800" alt="">
+        <div class="hero-caption">
+            <h1>찾아오는 길</h1>
+            <p>티에이치 쇼핑몰 찾아오는 길 안내해드려요.</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="section-title">📍 찾아오는 길</div>
+        <div id="map" style="width:100%;height:400px;background:#333;text-align:center;line-height:400px;">
+            네이버지도 영역
+        </div>
+
+        <!-- 주소 정보 영역 -->
+        <div class="mt-4 mb-4 p-3 rounded" style="background-color:#222; line-height:1.6; font-size:1.05rem;">
+            <div class="mb-2">
+                🏢 <strong>주소</strong><br>
+                <span style="word-break:keep-all;">경기도 안산시 단원구 시화호수로 633 마리나큐브오피스텔 909호</span>
+            </div>
+            <div class="mt-2">
+                🚘 <span style="color:#0dcaf0; font-weight:bold;">자가용으로 오신다면</span>
+                주차 시 <span style="color:#ffc107; font-weight:bold;">1시간 무료 혜택</span>을 드려요!
+                (편안하게 이용하세요)
+            </div>
+        </div>
+
+        <h2 class="h4 mb-3">🚌 대중교통 안내</h2>
+        <ul class="list-unstyled mb-4" style="line-height:1.6; font-size:1rem;">
+            <li>🚉 안산역, 초지역 고잔역 방향으로 <strong>2번 버스</strong> 이용 (15분 소요)</li>
+            <li>🚍 고잔역 <strong>500번 버스</strong> 이용 (40분 소요)</li>
+            <li>🏢 안산시청, 고잔신도시에서 <strong>122번 버스</strong> 이용 (20-30분 소요)</li>
+            <li>🌊 대부도, 거북섬에서 <strong>122번 버스</strong> 이용 (20-30분 소요)</li>
+            <li>🚆 서해선 서화성역 (셔틀버스 있음)</li>
+            <li>🛺 초지역, 시우역, 원시역 <strong>스마트허브 똑버스</strong> 이용</li>
+            <li>
+                🔗 스마트허브 똑버스 이용방법
+                <a href="https://th-study.tistory.com/136" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-sm btn-outline-info ms-2" style="font-weight:normal;">
+                    🚀 바로가기
+                </a>
+            </li>
+        </ul>
+
+        <h2 class="h4 mb-3">🚗 자동차 안내</h2>
+        <ul class="list-unstyled" style="line-height:1.6; font-size:1rem;">
+            <li>🛣️ 수도권 제2순환고속도로 시화나래 톨게이트</li>
+            <li>🛣️ 평택시흥고속도로 남안산 톨게이트</li>
+        </ul>
+    </div>
+</div>
+
+<script th:src="'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=' + ${mapClientId}"></script>
+<script th:src="@{/js/api/naver_map.js}"></script>

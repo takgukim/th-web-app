@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Table(name = "th_board")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // jpa 규약 + 외부에서 new 방지
 public class Board {
 
     @Id
