@@ -1,5 +1,6 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
+import com.developerleetaehee.th_web_app.controller.HomeController;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;
 import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
@@ -11,6 +12,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,8 @@ import java.util.List;
 @Tag(name = "홈페이지 게시글 API", description = "홈페이지에 게시글 CRUD 처리를 위한 API")
 public class BoardApiController {
     private final BoardService boardService;
+
+    private static final Logger log = LoggerFactory.getLogger(BoardApiController.class);
 
     @GetMapping
     @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")

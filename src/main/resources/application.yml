@@ -18,12 +18,10 @@ spring:
   # 타임존 관련 이슈 방지
   jackson:
     time-zone: Asia/Seoul
-
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace  # 쿼리 파라미터 값도 보여줌 (디버깅용)
-
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
 server:
   address: 0.0.0.0
   port: 8080
