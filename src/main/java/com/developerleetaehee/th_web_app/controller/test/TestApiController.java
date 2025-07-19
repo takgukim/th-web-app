@@ -1,5 +1,6 @@
 package com.developerleetaehee.th_web_app.controller.test;
 
+import com.developerleetaehee.th_web_app.controller.HomeController;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
 import com.developerleetaehee.th_web_app.service.test.TestService;
@@ -8,6 +9,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +23,17 @@ import java.util.List;
 public class TestApiController {
     private final TestService testService;
 
+    private static final Logger log = LoggerFactory.getLogger(TestApiController.class);
+
     @GetMapping
     @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
     public ResponseEntity<List<BoardResponse>> findAllBoard(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
             @RequestParam(name = "per_page", defaultValue = "10") int perPage
     ) {
+
+        log.info("로깅테스트");
+
         List<BoardResponse> boards =  testService.findAll(startPage, perPage)
                 .stream()
                 .map(BoardResponse::new)

@@ -10,12 +10,10 @@
 
     <!-- 파일에 로그 출력 - 하루마다 롤링, 7일치 보관 -->
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/app.log</file>  <!-- 로그 파일 위치 -->
+        <file>logs/app.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 하루마다 롤링하며 7일치 로그 보관 -->
             <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
-            <!-- 총 용량 제한 (옵션) -->
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
@@ -23,8 +21,8 @@
         </encoder>
     </appender>
 
-    <!-- 루트 로거 설정 -->
-    <root level="info">
+    <!-- 루트 로거 로그 레벨을 trace로 설정 -->
+    <root level="debug">
         <appender-ref ref="Console" />
         <appender-ref ref="RollingFile" />
     </root>
