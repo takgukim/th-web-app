@@ -1,6 +1,5 @@
 package com.developerleetaehee.th_web_app.controller.test;
 
-import com.developerleetaehee.th_web_app.controller.HomeController;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
 import com.developerleetaehee.th_web_app.service.test.TestService;
