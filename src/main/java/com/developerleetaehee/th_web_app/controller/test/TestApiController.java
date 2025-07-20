@@ -5,6 +5,8 @@ import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
 import com.developerleetaehee.th_web_app.service.test.TestService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +55,12 @@ public class TestApiController {
 
     @PostMapping
     @Operation(summary = "게시글 생성", description = "게시글을 신규로 생성합니다.")
+    @Parameter(
+            description = "게시글 종류 정보",
+            schema = @Schema(
+                    allowableValues = {"notice : 공지사항, free : 자유게시판, adults_only : 성인전용"}
+            )
+    )
     public ResponseEntity<BoardResponse> addBoard(
             @RequestBody Board request,
             HttpServletRequest httpRequest) {

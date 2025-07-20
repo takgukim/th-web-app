@@ -1,5 +1,6 @@
 package com.developerleetaehee.th_web_app.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,7 @@ public class Board {
     private String writeDate;
 
     @Column(name = "board_type", nullable = false, updatable = false, length = 30)
+    @JsonProperty("board_type")
     private String boardType;
 
     @Column(name = "ip_address", length = 45)

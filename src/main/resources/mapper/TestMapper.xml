@@ -11,6 +11,7 @@
         <result property="content" column="content"/>
         <result property="ipAddress" column="ip_address"/>
         <result property="writeDate" column="write_date"/>
+        <result property="boardType" column="board_type"/>
         <result property="registerDatetime" column="register_datetime"/>
         <result property="updateDatetime" column="update_datetime"/>
         <result property="updateUser" column="update_user"/>
@@ -51,7 +52,8 @@
             `subject` = #{subject},
             `content` = #{content},
             `ip_address` = #{ipAddress},
-            `write_date` = #{writeDate}
+            `write_date` = #{writeDate},
+            `board_type` = #{boardType}
     </insert>
 
     <update id="update" parameterType="Board">
