@@ -32,9 +32,7 @@
         <where>
             `delete_datetime` IS NULL
 
-            <if test="boardType != null and boardType != ''">
-                AND `board_type` = #{boardType}
-            </if>
+            AND `board_type` = #{boardType}
 
             <if test="writer != null and writer != ''">
                 AND `writer` like concat('%', #{writer}, '%')

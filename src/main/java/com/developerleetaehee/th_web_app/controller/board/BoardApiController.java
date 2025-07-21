@@ -1,10 +1,7 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
 import com.developerleetaehee.th_web_app.domain.Board;
-import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;
-import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
-import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
-import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.*;
 import com.developerleetaehee.th_web_app.service.board.BoardService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,11 +25,27 @@ public class BoardApiController {
 
     @GetMapping
     @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
+    @Parameter(
+            description = "게시글 종류 정보를 반드시 넘겨주세요.",
+            schema = @Schema(
+                    allowableValues = {"notice : 공지사항, free : 자유게시판, adults_only : 성인전용"}
+            )
+    )
     public ResponseEntity<List<BoardResponse>> findAllBoards(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
-            @RequestParam(name = "per_page", defaultValue = "10") int perPage
+            @RequestParam(name = "per_page", defaultValue = "10") int perPage,
+            @RequestParam(required = false) String writer,
+            @RequestParam(required = false) String subject,
+            @RequestParam(name = "board_type") String boardType
     ) {
-        List<BoardResponse> boards = boardService.findAll(startPage, perPage)
+        // 검색을 위한 설정
+        BoardSearchRequest boardSearchRequest = new BoardSearchRequest();
+        boardSearchRequest.setPageRange(startPage, perPage);
+        boardSearchRequest.setWriter(writer);
+        boardSearchRequest.setSubject(subject);
+        boardSearchRequest.setBoardType(boardType);
+
+        List<BoardResponse> boards = boardService.findAll(boardSearchRequest)
                 .stream()
                 .map(BoardResponse::new)
                 .toList();

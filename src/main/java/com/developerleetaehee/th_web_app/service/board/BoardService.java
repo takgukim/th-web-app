@@ -2,9 +2,11 @@ package com.developerleetaehee.th_web_app.service.board;
 
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.BoardSearchRequest;
 import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
 import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
 import com.developerleetaehee.th_web_app.repository.BoardRepository;
+import com.developerleetaehee.th_web_app.specification.BoardSpecification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -22,9 +24,14 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public Page<Board> findAll(int startPage, int perPage) {
+    public Page<Board> findAll(BoardSearchRequest boardSearchRequest) {
+
+        int startPage = boardSearchRequest.getStartPage();
+        int perPage = boardSearchRequest.getPerPage();
+
         Pageable pageable = PageRequest.of(startPage, perPage, Sort.by(Sort.Direction.DESC, "idx"));
-        return boardRepository.findByDeleteDatetimeIsNull(pageable);
+
+        return boardRepository.findAll(BoardSpecification.search(boardSearchRequest), pageable);
     }
 
     public Board findById(long id) {
