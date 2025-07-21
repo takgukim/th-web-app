@@ -2,6 +2,7 @@ package com.developerleetaehee.th_web_app.service.test;
 
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.PageRequest;
+import com.developerleetaehee.th_web_app.dto.board.BoardSearchRequest;
 import com.developerleetaehee.th_web_app.mapper.TestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,9 @@ import java.util.List;
 public class TestService {
     private final TestMapper boardMapper;
 
-    public List<Board> findAll(int startPage, int perPage) {
-        int offset = startPage * perPage;
+    public List<Board> findAll(BoardSearchRequest boardSearchRequest) {
 
-        PageRequest pageRequest = new PageRequest(offset, perPage);
-
-        List<Board> boards = boardMapper.findAll(pageRequest);
+        List<Board> boards = boardMapper.findAll(boardSearchRequest);
 
         return boards;
     }

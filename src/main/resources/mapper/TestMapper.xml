@@ -21,7 +21,7 @@
 
     <select id="findAll"
             resultMap="BoardResultMap"
-            parameterType="com.developerleetaehee.th_web_app.dto.PageRequest">
+            parameterType="com.developerleetaehee.th_web_app.dto.board.BoardSearchRequest">
         SELECT `idx`,
                `writer`,
                `subject`,
@@ -29,7 +29,21 @@
                `write_date`,
                `register_datetime`
         FROM `th_board`
-        WHERE `delete_datetime` IS NULL
+        <where>
+            `delete_datetime` IS NULL
+
+            <if test="boardType != null and boardType != ''">
+                AND `board_type` = #{boardType}
+            </if>
+
+            <if test="writer != null and writer != ''">
+                AND `writer` like concat('%', #{writer}, '%')
+            </if>
+
+            <if test="subject != null and subject != ''">
+                AND `subject` like concat('%', #{subject}, '%')
+            </if>
+        </where>
         ORDER BY `idx` DESC
         LIMIT #{startPage}, #{perPage}
     </select>

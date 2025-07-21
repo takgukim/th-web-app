@@ -1,12 +1,11 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
-import com.developerleetaehee.th_web_app.controller.HomeController;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;
 import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
 import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
 import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
-import com.developerleetaehee.th_web_app.service.boarf.BoardService;
+import com.developerleetaehee.th_web_app.service.board.BoardService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

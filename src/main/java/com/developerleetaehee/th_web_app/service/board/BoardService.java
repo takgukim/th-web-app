@@ -1,4 +1,4 @@
-package com.developerleetaehee.th_web_app.service.boarf;
+package com.developerleetaehee.th_web_app.service.board;
 
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.AddBoardRequest;

@@ -29,6 +29,8 @@ server:
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
   type-aliases-package: com.developerleetaehee.th_web_app.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #네이버 지도 API 연동 정보
 naver:

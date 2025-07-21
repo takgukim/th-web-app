@@ -1,6 +1,6 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
-import com.developerleetaehee.th_web_app.service.boarf.BoardService;
+import com.developerleetaehee.th_web_app.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
