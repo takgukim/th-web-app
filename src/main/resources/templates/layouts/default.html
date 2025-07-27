@@ -10,6 +10,10 @@
 
         <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
         <link th:href="@{/css/common.css}" rel="stylesheet">
+        <link th:href="@{/css/pagination.css}" rel="stylesheet">
+
+        <!-- css 메뉴별로 확장하는 방법 : index.html 참조 -->
+        <layout:insert name="custom_css"></layout:insert>
     </head>
     <body>
 
@@ -27,5 +31,7 @@
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
         <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
 
+        <!-- 자바스크립트파일 메뉴로 별로 확장 : 공지사항 참조 -->
+        <layout:insert name="custom_js"></layout:insert>
     </body>
 </html>

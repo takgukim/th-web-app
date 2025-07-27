@@ -1,0 +1,17 @@
+.pagination {
+  justify-content:center;
+}
+
+@media (max-width:768px){
+
+  /* 기존에 nth-child로 숨기던 것 제거하고, 기본적으로 모두 숨김 */
+  .pagination li.page-item {
+    display: none;
+  }
+
+  /* 이전(‹), 다음(›)만 다시 표시 */
+  .pagination li.page-item.prev,
+  .pagination li.page-item.next {
+    display: inline-block;
+  }
+}

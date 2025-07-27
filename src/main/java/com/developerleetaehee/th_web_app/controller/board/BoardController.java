@@ -5,14 +5,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board/notice")
+    @GetMapping("/notice")
     public String test(Model model) {
         model.addAttribute("title", "공지사항");
 

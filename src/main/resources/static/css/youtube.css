@@ -1,0 +1,91 @@
+.youtube-wrapper {
+  display: flex;
+  gap: 1rem;
+  height: 400px;
+}
+.youtube-left {
+  flex: 2;
+  min-width: 0;
+}
+.youtube-left iframe {
+  width:100%;
+  height:100%;
+  border:0;
+}
+.youtube-right {
+  flex: 1;
+  overflow-y: auto;
+}
+.youtube-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.youtube-item img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+.youtube-item-title {
+  flex: 1;
+  color:#fff;
+  font-size:0.9rem;
+}
+@media (max-width:768px){
+  .youtube-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+  .youtube-right {
+    max-height: 200px;
+  }
+  .youtube-item img {
+    width: 80px;
+    height: 45px;
+  }
+}
+
+.shorts-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+.shorts-card {
+  flex: 0 0 auto;
+  width: 180px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #222;
+  scroll-snap-align: start;
+  position: relative;
+  text-align: center;
+}
+.shorts-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.shorts-title {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .shorts-card {
+    width: 140px;
+  }
+  .shorts-card img {
+    height: 240px;
+  }
+}

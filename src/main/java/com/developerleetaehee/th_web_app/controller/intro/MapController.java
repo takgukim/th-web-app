@@ -15,7 +15,7 @@ public class MapController {
     private final NaverMapProperties naverMapProperties;
 
     @GetMapping("/map")
-    public String test(Model model) {
+    public String naverMap(Model model) {
         model.addAttribute("title", "찾아오는 길");
         model.addAttribute("mapClientId", naverMapProperties.getClientId());
 

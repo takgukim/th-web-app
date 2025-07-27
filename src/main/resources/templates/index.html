@@ -3,6 +3,10 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
+    <th:block layout:fragment="custom_css">
+        <link rel="stylesheet" th:href="@{/css/youtube.css}" />
+    </th:block>
+
     <!-- 슬라이드 -->
     <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" style="margin-top:56px;">
         <div class="carousel-inner">

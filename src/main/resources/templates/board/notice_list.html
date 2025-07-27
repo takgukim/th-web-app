@@ -3,6 +3,10 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
+    <th:block layout:fragment="custom_css">
+        <link rel="stylesheet" th:href="@{/css/board/notice.css}" />
+    </th:block>
+
     <div class="main-hero">
         <img src="https://picsum.photos/id/1018/1600/800" alt="">
         <div class="hero-caption">
@@ -30,21 +34,30 @@
             <tr><td>1</td><td>공지사항 제목1</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
             </tbody>
         </table>
+
         <nav>
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <!-- 맨 처음 -->
+                <li class="page-item">
+                    <a class="page-link" href="#">«</a>
+                </li>
+
+                <li class="page-item prev"><a class="page-link" href="#">‹</a></li>
+
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                 <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                <li class="page-item"><a class="page-link" href="#">9</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
+
+                <li class="page-item next"><a class="page-link" href="#">›</a></li>
+
                 <li class="page-item"><a class="page-link" href="#">»</a></li>
             </ul>
         </nav>
     </div>
 </div>
+
+<th:block layout:fragment="custom_js">
+    <script th:src="@{/js/board/notice.js}"></script>
+</th:block>
