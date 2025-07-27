@@ -51,6 +51,7 @@ public class BoardService {
         board.setSubject(request.getSubject());
         board.setContent(request.getContent());
         board.setUpdateUser(request.getUpdateUser());
+        board.setReadCount(request.getReadCount());
         board.update(board);
 
         return board;

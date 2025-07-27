@@ -96,6 +96,8 @@ public class TestApiController {
             @PathVariable Long id,
             @RequestBody Board request) {
 
+        System.out.println("컨트롤러 가져오나 ?? " + request.getReadCount());
+
         Board board = testService.update(id, request);
 
         return ResponseEntity.ok()

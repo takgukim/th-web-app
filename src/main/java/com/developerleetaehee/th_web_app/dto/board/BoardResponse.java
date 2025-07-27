@@ -13,6 +13,7 @@ public class BoardResponse {
     private final String subject;
     private final String content;
     private final String writeDate;
+    private final int readCount;
 
     public BoardResponse(Board board) {
 
@@ -22,6 +23,8 @@ public class BoardResponse {
         this.writer = board.getWriter();
         this.subject = board.getSubject();
         this.content = board.getContent();
+        this.readCount = board.getReadCount();
+
         this.writeDate = fmtDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 }

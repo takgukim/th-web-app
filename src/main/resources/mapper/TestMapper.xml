@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.developerleetaehee.th_web_app.mapper.TestMapper">
-    <resultMap id="BoardResultMap" type="Board">
+    <resultMap id="BoardResultMap" type="com.developerleetaehee.th_web_app.domain.Board">
         <id property="idx" column="idx"/>
         <result property="writer" column="writer"/>
         <result property="subject" column="subject"/>
@@ -12,6 +12,7 @@
         <result property="ipAddress" column="ip_address"/>
         <result property="writeDate" column="write_date"/>
         <result property="boardType" column="board_type"/>
+        <result property="readCount" column="read_count" />
         <result property="registerDatetime" column="register_datetime"/>
         <result property="updateDatetime" column="update_datetime"/>
         <result property="updateUser" column="update_user"/>
@@ -27,6 +28,7 @@
                `subject`,
                `content`,
                `write_date`,
+               `read_count`,
                `register_datetime`
         FROM `th_board`
         <where>
@@ -52,6 +54,7 @@
                `subject`,
                `content`,
                `write_date`,
+               `read_count`,
                `register_datetime`
         FROM `th_board`
         WHERE `idx` = #{idx}
@@ -73,6 +76,7 @@
             `writer` = #{writer},
             `subject` = #{subject},
             `content` = #{content},
+            `read_count` = #{readCount},
             `update_datetime` = NOW(),
             `update_user` = #{updateUser}
         WHERE `idx` = #{idx}

@@ -38,6 +38,10 @@ public class Board {
     @Column(name = "ip_address", length = 45)
     private String ipAddress;
 
+    @Column(name = "read_count", nullable = false)
+    @JsonProperty("read_count")
+    private int readCount;
+
     @Column(name = "register_datetime", nullable = false, updatable = false)
     private LocalDateTime registerDatetime;
 
