@@ -18,7 +18,7 @@ public class BoardSearchRequest {
     private String writeDate;
 
     public void setPageRange(int startPage, int perPage) {
-        this.startPage = startPage * perPage;
+        this.startPage = startPage;
         this.perPage = perPage;
     }
 }

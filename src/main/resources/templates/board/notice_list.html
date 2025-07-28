@@ -18,43 +18,39 @@
     <div class="container my-5">
         <div class="section-title">공지사항</div>
         <table class="table table-dark table-striped">
+            <colgroup>
+                <col style="8%" />
+                <col style="40%" />
+                <col style="15%" />
+                <col style="20%" />
+                <col style="15%" />
+            </colgroup>
             <thead>
-            <tr><th>No</th><th>제목</th><th>작성자</th><th>등록시각</th><th>조회수</th></tr>
+                <tr>
+                    <th>No</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록시각</th>
+                    <th>조회수</th>
+                </tr>
             </thead>
             <tbody>
-            <tr><td>10</td><td>공지사항 제목10</td><td>작성자3</td><td>2025-06-23</td><td>97</td></tr>
-            <tr><td>9</td><td>공지사항 제목9</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
-            <tr><td>8</td><td>공지사항 제목8</td><td>작성자3</td><td>2025-06-23</td><td>97</td></tr>
-            <tr><td>7</td><td>공지사항 제목7</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
-            <tr><td>6</td><td>공지사항 제목6</td><td>작성자3</td><td>2025-06-23</td><td>97</td></tr>
-            <tr><td>5</td><td>공지사항 제목5</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
-            <tr><td>4</td><td>공지사항 제목4</td><td>작성자3</td><td>2025-06-23</td><td>97</td></tr>
-            <tr><td>3</td><td>공지사항 제목3</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
-            <tr><td>2</td><td>공지사항 제목2</td><td>작성자3</td><td>2025-06-23</td><td>97</td></tr>
-            <tr><td>1</td><td>공지사항 제목1</td><td>작성자2</td><td>2025-06-24</td><td>76</td></tr>
+                <tr th:each="board, stat: ${boards}">
+                    <td th:text="${pages.pagingStartNo - stat.index}"></td>
+                    <td th:text="${board.subject}"></td>
+                    <td th:text="${board.writer}"></td>
+                    <th th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></th>
+                    <td th:text="${board.readCount}"></td>
+                </tr>
+
+                <tr class="no-data-row" th:if="${boards.size() == 0}">
+                    <td colspan="5">등록된 내용이 없습니다.</td>
+                </tr>
+
             </tbody>
         </table>
 
-        <nav>
-            <ul class="pagination">
-                <!-- 맨 처음 -->
-                <li class="page-item">
-                    <a class="page-link" href="#">«</a>
-                </li>
-
-                <li class="page-item prev"><a class="page-link" href="#">‹</a></li>
-
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-
-                <li class="page-item next"><a class="page-link" href="#">›</a></li>
-
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </nav>
+        <nav th:replace="fragments/pagination :: pagination"></nav>
     </div>
 </div>
 

@@ -24,12 +24,21 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    public Page<Board> getBoardPage(BoardSearchRequest boardSearchRequest) {
+        Pageable pageable = PageRequest.of(
+                boardSearchRequest.getStartPage(),
+                boardSearchRequest.getPerPage()
+        );
+
+        return boardRepository.findAll(BoardSpecification.search(boardSearchRequest), pageable);
+    }
+
     public Page<Board> findAll(BoardSearchRequest boardSearchRequest) {
-
-        int startPage = boardSearchRequest.getStartPage();
-        int perPage = boardSearchRequest.getPerPage();
-
-        Pageable pageable = PageRequest.of(startPage, perPage, Sort.by(Sort.Direction.DESC, "idx"));
+       Pageable pageable = PageRequest.of(
+                boardSearchRequest.getStartPage(),
+                boardSearchRequest.getPerPage(),
+                Sort.by(Sort.Direction.DESC, "idx")
+        );
 
         return boardRepository.findAll(BoardSpecification.search(boardSearchRequest), pageable);
     }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IntroController {
 
     @GetMapping("/company")
-    public String introCompany(Model model) {
+    public String showCompany(Model model) {
         model.addAttribute("title", "회사소개");
 
         return "intro/company_intro";
