@@ -32,7 +32,7 @@ public class BoardController {
 
         BoardSearchRequest boardSearchRequest = new BoardSearchRequest();
         boardSearchRequest.setPageRange(startPage, perPage);
-        boardSearchRequest.setBoardType("adults_only");
+        boardSearchRequest.setBoardType("notice");
 
         List<BoardListViewResponse> boards = boardService.findAll(boardSearchRequest)
                         .stream()
