@@ -1,0 +1,63 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/default}"
+     layout:fragment="content">
+
+  <th:block layout:fragment="custom_css">
+    <link rel="stylesheet" th:href="@{/css/board/board.css}" />
+  </th:block>
+
+  <div class="main-hero">
+    <img src="https://picsum.photos/id/1018/1600/800" alt="">
+    <div class="hero-caption">
+      <h1>질의응답</h1>
+      <p>고객의 궁금한점에 대해서 답변해드리겠습니다.</p>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <div class="section-title">질의응답</div>
+    <table class="table table-dark table-striped">
+      <colgroup>
+        <col style="8%" />
+        <col style="40%" />
+        <col style="15%" />
+        <col style="20%" />
+        <col style="15%" />
+      </colgroup>
+      <thead>
+      <tr>
+        <th>No</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>등록시각</th>
+        <th>조회수</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="board, stat: ${boards}">
+        <td th:text="${pages.pagingStartNo - stat.index}"></td>
+        <td th:text="${board.subject}"></td>
+        <td th:text="${board.writer}"></td>
+        <th th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></th>
+        <td th:text="${board.readCount}"></td>
+      </tr>
+
+      <tr class="no-data-row" th:if="${boards.size() == 0}">
+        <td colspan="5">등록된 내용이 없습니다.</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <div class="text-end my-3">
+      <a href="/boards/write" class="btn btn-warning">✏️ 문의하기</a>
+    </div>
+
+    <nav th:replace="fragments/pagination :: pagination"></nav>
+  </div>
+</div>
+
+<th:block layout:fragment="custom_js">
+  <script th:src="@{/js/board/board.js}"></script>
+</th:block>

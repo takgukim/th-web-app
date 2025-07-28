@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PaginationUtil {
-    public static Map<String, Object> buildPage(Page<?> page, int startPage, int perPage) {
+    public static Map<String, Object> buildPage(Page<?> page, String pageUrl, int startPage, int perPage) {
         long boardTotal = page.getTotalElements();
         long pagingStartNo = boardTotal - (perPage * (startPage));
 
@@ -24,6 +24,7 @@ public class PaginationUtil {
 
         Map<String, Object> pages = new HashMap<>();
         pages.put("pagingStartNo", pagingStartNo);
+        pages.put("pageUrl", pageUrl);
         pages.put("currentPage", currentPage);
         pages.put("totalPage", totalPage);
         pages.put("startRangePage", startRangePage);

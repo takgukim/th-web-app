@@ -1,24 +1,24 @@
 <nav th:if="${pages != null and !#maps.isEmpty(pages)}"  th:fragment="pagination">
     <ul class="pagination">
         <li class="page-item" th:classappend="${pages.currentPage == 1 or pages.startRangePage == 1} ? 'd-none'">
-            <a class="page-link" th:href="@{/board/notice(start_page=0)}">«</a>
+            <a class="page-link" th:href="@{${pageUrl}(start_page=0)}">«</a>
         </li>
 
         <li class="page-item prev" th:classappend="${pages.currentPage == 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/board/notice(start_page=${pages.currentPage-2})}">‹</a>
+            <a class="page-link" th:href="@{${pageUrl}(start_page=${pages.currentPage-2})}">‹</a>
         </li>
 
         <li class="page-item" th:each="i : ${#numbers.sequence(pages.startRangePage,pages.endRangePage)}"
             th:classappend="${i == pages.currentPage} ? 'active'">
-            <a class="page-link" th:href="@{/board/notice(start_page=${i-1})}" th:text="${i}"></a>
+            <a class="page-link" th:href="@{${pageUrl}(start_page=${i-1})}" th:text="${i}"></a>
         </li>
 
         <li class="page-item next" th:classappend="${pages.currentPage == pages.totalPage} ? 'disabled'">
-            <a class="page-link" th:href="@{/board/notice(start_page=${pages.currentPage})}">›</a>
+            <a class="page-link" th:href="@{${pageUrl}(start_page=${pages.currentPage})}">›</a>
         </li>
 
         <li class="page-item" th:classappend="${pages.currentPage == pages.totalPage or pages.endRangePage == pages.totalPage} ? 'd-none'">
-            <a class="page-link" th:href="@{/board/notice(start_page=${pages.totalPage-1})}">»</a>
+            <a class="page-link" th:href="@{${pageUrl}(start_page=${pages.totalPage-1})}">»</a>
         </li>
     </ul>
 </nav>

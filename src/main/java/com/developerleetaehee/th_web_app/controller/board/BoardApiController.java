@@ -10,26 +10,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/boards")
 @Tag(name = "홈페이지 게시글 API", description = "홈페이지에 게시글 CRUD 처리를 위한 API")
 public class BoardApiController {
+
     private final BoardService boardService;
+
+    @Autowired
+    private final BoardCustomConfig boardCustomConfig;
 
     @GetMapping
     @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
     @Parameter(
             description = "게시글 종류 정보를 반드시 넘겨주세요.",
-            schema = @Schema(
-                    allowableValues = {"notice : 공지사항, free : 자유게시판, adults_only : 성인전용"}
-            )
+            schema = @Schema(allowableValues = {"notice : 공지사항, free : 자유게시판, adults_only : 성인전용, qna : 질의응답"})
     )
     public ResponseEntity<List<BoardResponse>> findAllBoards(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
@@ -38,6 +43,11 @@ public class BoardApiController {
             @RequestParam(required = false) String subject,
             @RequestParam(name = "board_type") String boardType
     ) {
+        BoardInfo boardInfo = boardCustomConfig.getConfig().get(boardType);
+        if (boardInfo == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "해당 타입 없음");
+        }
+
         // 검색을 위한 설정
         BoardSearchRequest boardSearchRequest = new BoardSearchRequest();
         boardSearchRequest.setPageRange(startPage, perPage);
