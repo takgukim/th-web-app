@@ -16,6 +16,8 @@ public class BoardSearchRequest {
     private String subject;
     private String boardType;
     private String writeDate;
+    private String searchStartDate;
+    private String searchEndDate;
 
     public void setPageRange(int startPage, int perPage) {
         this.startPage = startPage;

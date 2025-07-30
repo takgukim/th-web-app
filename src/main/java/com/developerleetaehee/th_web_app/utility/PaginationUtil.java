@@ -2,11 +2,14 @@ package com.developerleetaehee.th_web_app.utility;
 
 import org.springframework.data.domain.Page;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PaginationUtil {
-    public static Map<String, Object> buildPage(Page<?> page, String pageUrl, int startPage, int perPage) {
+    public static Map<String, Object> buildPage(Page<?> page, int startPage, int perPage, String pageUrl, String queryString) {
         long boardTotal = page.getTotalElements();
         long pagingStartNo = boardTotal - (perPage * (startPage));
 
@@ -22,6 +25,11 @@ public class PaginationUtil {
             startRangePage = Math.max(1, endRangePage - 4);
         }
 
+        String qs = "";
+        if (queryString != null && !queryString.isEmpty()) {
+            qs = String.format("&%s", queryString);
+        }
+
         Map<String, Object> pages = new HashMap<>();
         pages.put("pagingStartNo", pagingStartNo);
         pages.put("pageUrl", pageUrl);
@@ -29,9 +37,16 @@ public class PaginationUtil {
         pages.put("totalPage", totalPage);
         pages.put("startRangePage", startRangePage);
         pages.put("endRangePage", endRangePage);
-
-        System.out.println("current page = " + currentPage);
+        pages.put("queryString", qs);
 
         return pages;
+    }
+
+    public static String buildQueryStringFromMap(Map<String, ?> map) {
+        return map.entrySet().stream()
+                .filter(e -> e.getValue() != null && !e.getValue().toString().isBlank())
+                .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8) + "=" +
+                        URLEncoder.encode(e.getValue().toString(), StandardCharsets.UTF_8))
+                .collect(Collectors.joining("&"));
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-public class BoardListViewResponse {
+public class BoardViewResponse {
     private final long idx;
     private final String writer;
     private final String subject;
@@ -18,7 +18,7 @@ public class BoardListViewResponse {
     private final int readCount;
     private final LocalDateTime registerDatetime;
 
-    public BoardListViewResponse(Board board) {
+    public BoardViewResponse(Board board) {
         LocalDate fmtDate = LocalDate.parse(board.getWriteDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         this.idx = board.getIdx();

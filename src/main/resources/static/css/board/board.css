@@ -16,3 +16,76 @@
     display: none;
   }
 }
+
+.form-section {
+   text-align: left;
+ }
+ .form-section h3.section-title-detail {
+   font-size: 1.75rem;
+   color: white;
+   font-weight: 700;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+ .detail-info-table {
+   color: white;
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 1.5rem;
+ }
+ .detail-info-table th {
+   width: 120px;
+   background-color: #ffc107;
+   color: #212529;
+   padding: 0.75rem 1rem;
+   text-align: left;
+   vertical-align: middle;
+   border-bottom: 1px solid #6c757d;
+ }
+ .detail-info-table td {
+   padding: 0.75rem 1rem;
+   vertical-align: middle;
+   border-bottom: 1px solid #6c757d;
+ }
+ .form-section h5.section-subtitle {
+   color: white;
+   margin-bottom: 0.5rem;
+ }
+
+ .detail-info-table td input,
+ .detail-info-table td textarea,
+ .detail-info-table td select {
+   width: 100%;
+ }
+
+ /* 검색 폼 컨테이너 스타일 */
+ .search-section {
+   background-color: #111;
+   padding: 1rem;
+   margin-bottom: 2rem;
+   border-radius: 6px;
+ }
+ .search-section label {
+   color: white;
+   font-weight: 600;
+ }
+
+ .search-section button {
+   width: 100%;
+ }
+
+ .input-group-text {
+   display: inline-block; /* or default */
+   margin-top: 0 !important;
+   margin-bottom: 0 !important;
+   /* 혹시 아래처럼 block 들어가 있으면 문제 됨 */
+ }
+
+ .input-group > .form-control {
+   flex: 1 1 auto; /* 자동 너비로 줄어들게 */
+ }
+
+ .input-group > .input-group-text {
+   flex: 0 0 auto; /* 아이콘은 고정 사이즈 */
+ }

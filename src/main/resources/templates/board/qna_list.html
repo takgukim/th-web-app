@@ -54,7 +54,11 @@
       <a href="/boards/write" class="btn btn-warning">✏️ 문의하기</a>
     </div>
 
-    <nav th:replace="fragments/pagination :: pagination"></nav>
+    <nav th:replace="fragments/pagination :: pagination(
+        pages=${pages},
+        searchParamMap=${searchParamMap},
+        queryString=${queryString}
+    )"></nav>
   </div>
 </div>
 
