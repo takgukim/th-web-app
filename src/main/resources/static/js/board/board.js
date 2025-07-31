@@ -1,4 +1,9 @@
+/*
+ * 게시판
+ */
 $(function() {
+    console.log("board.js");
+
     $(".tr-click-row").on("click", function() {
        const $tr = $(this).closest("tr");
 
@@ -11,5 +16,16 @@ $(function() {
        }
 
        $(location).attr('href', `/boards/${boardType}/posts/${id}`);
+    });
+
+    $("#btnSearch").on("click", function() {
+        $("#search_form").submit();
+    });
+
+    $("#btnReset").on("click", function() {
+        startPicker.setDate(FLATPICKR_ONE_MONTH, true);
+        endPicker.setDate(FLATPICKR_COMMON_TODAY, true);
+        $("#search_subject").val("");
+        $("#search_writer").val("");
     });
 });

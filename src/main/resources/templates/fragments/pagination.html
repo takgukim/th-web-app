@@ -1,4 +1,4 @@
-<nav th:if="${pages != null and !#maps.isEmpty(pages)}"
+<nav th:if="${pages != null and !#maps.isEmpty(pages) and pages.totalPage > 0}"
      th:fragment="pagination(pages, queryString)">
     <ul class="pagination">
         <li class="page-item" th:classappend="${pages.currentPage == 1 or pages.startRangePage == 1} ? 'd-none'">

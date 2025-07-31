@@ -35,7 +35,7 @@
                                name="search_start_date"
                                class="form-control"
                                placeholder="YYYY-MM-DD"
-                               th:value="${search_start_date}"
+                               th:value="${searchParamMap.search_start_date}"
                                data-input />
                         <span class="input-group-text bg-secondary text-white" data-open>
                             <i class="bi bi-calendar3"></i>
@@ -52,7 +52,7 @@
                                name="search_end_date"
                                class="form-control"
                                placeholder="YYYY-MM-DD"
-                               th:value="${search_end_date}"
+                               th:value="${searchParamMap.search_end_date}"
                                data-input />
                         <span class="input-group-text bg-secondary text-white" data-open>
                             <i class="bi bi-calendar3"></i>
@@ -88,7 +88,7 @@
 
                 <!-- 검색 + 초기화 버튼 그룹 -->
                 <div class="d-flex flex-column flex-md-row gap-2">
-                    <button type="submit" class="btn btn-warning flex-grow-1">검색</button>
+                    <button type="button" id="btnSearch" class="btn btn-warning flex-grow-1">검색</button>
                     <button type="button" id="btnReset" class="btn btn-secondary flex-grow-1">초기화</button>
                 </div>
             </div>
@@ -140,21 +140,20 @@
 <th:block layout:fragment="custom_js">
     <script th:src="@{/js/board/board.js}"></script>
     <script>
-        // flatpickr 초기화
-        flatpickr("#flatPickerStartDate", {
+        const startPicker = flatpickr("#flatPickerStartDate", {
             dateFormat: "Y-m-d",
             locale: "ko",
             maxDate: "today",
-            defaultDate: "today",
+            defaultDate: $("#search_start_date").val() || FLATPICKR_ONE_MONTH,
             wrap: true,
             disableMobile: true
         });
 
-        flatpickr("#flatPickerEndDate", {
+        const endPicker = flatpickr("#flatPickerEndDate", {
             dateFormat: "Y-m-d",
             locale: "ko",
             maxDate: "today",
-            defaultDate: "today",
+            defaultDate: $("#search_end_date").val() || FLATPICKR_COMMON_TODAY,
             wrap: true,
             disableMobile: true
         });

@@ -18,14 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -54,10 +50,8 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
-        type = "adults_only";
-
         if (searchStartDate == null || searchStartDate.isBlank()) {
-            searchStartDate = LocalDate.now().toString(); // "2025-07-30" 형식
+            searchStartDate = LocalDate.now().minusMonths(1).toString();
         }
         if (searchEndDate == null || searchEndDate.isBlank()) {
             searchEndDate = LocalDate.now().toString();
