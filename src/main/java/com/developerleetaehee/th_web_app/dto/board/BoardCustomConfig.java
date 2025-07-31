@@ -1,6 +1,5 @@
 package com.developerleetaehee.th_web_app.dto.board;
 
-import com.developerleetaehee.th_web_app.domain.Board;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ public class BoardCustomConfig {
     private final Map<String, BoardInfo> config = Map.of(
             "notice", new BoardInfo("공지사항", "notice"),
             "free", new BoardInfo("자유게시판", "free"),
-            "qna", new BoardInfo("질의응답", "qna")
-            //"adults_only", new BoardInfo("성인전용", "adults")
+            "qna", new BoardInfo("질의응답", "qna"),
+            "adults_only", new BoardInfo("성인전용", "adults_only")
     );
 }
