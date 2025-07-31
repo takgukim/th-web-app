@@ -20,7 +20,7 @@
 .form-section {
    text-align: left;
  }
- .form-section h3.section-title-detail {
+ .section-title-detail {
    font-size: 1.75rem;
    color: white;
    font-weight: 700;
@@ -88,4 +88,24 @@
 
  .input-group > .input-group-text {
    flex: 0 0 auto; /* 아이콘은 고정 사이즈 */
+ }
+
+ /* 테이블 행(row)에 마우스 올리면 색상 변하기 */
+ .clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+ }
+
+ /* 테이블 th 색상 부여 */
+ thead.thead_list th {
+   background-color: #0d6efd !important;
+   color: white !important;
+ }
+
+ .tr-click-row:hover > td {
+     background-color: #17c3b2 !important;
+ }
+
+ .tr-click-row:active > tr {
+   background-color: #f4d35e !important;
  }

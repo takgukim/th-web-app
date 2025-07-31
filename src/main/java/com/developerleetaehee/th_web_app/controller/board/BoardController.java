@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class BoardController {
     private BoardCustomConfig boardCustomConfig;
 
     @GetMapping("/{type}/posts")
-    public String findAllNotices(
+    public String findAllBoards(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
             @RequestParam(name = "per_page", defaultValue = "10") int perPage,
             @RequestParam(name = "search_subject", defaultValue = "") String searchSubject,
@@ -52,15 +54,36 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
+        type = "adults_only";
+
+        if (searchStartDate == null || searchStartDate.isBlank()) {
+            searchStartDate = LocalDate.now().toString(); // "2025-07-30" 형식
+        }
+        if (searchEndDate == null || searchEndDate.isBlank()) {
+            searchEndDate = LocalDate.now().toString();
+        }
+
         BoardSearchRequest boardSearchRequest = new BoardSearchRequest();
         boardSearchRequest.setPageRange(startPage, perPage);
         boardSearchRequest.setBoardType(type);
         boardSearchRequest.setSubject(searchSubject);
         boardSearchRequest.setWriter(searchWriter);
+        boardSearchRequest.setSearchStartDate(searchStartDate);
+        boardSearchRequest.setSearchEndDate(searchEndDate);
 
         Map<String, Object> searchParamMap = new HashMap<>();
+        searchParamMap.put("search_start_date", "");
+        searchParamMap.put("search_end_date", "");
         searchParamMap.put("search_subject", "");
         searchParamMap.put("search_writer", "");
+
+        if (StringUtils.hasText(searchStartDate)) {
+            searchParamMap.put("search_start_date", searchStartDate);
+        }
+
+        if (StringUtils.hasText(searchEndDate)) {
+            searchParamMap.put("search_end_date", searchEndDate);
+        }
 
         if (StringUtils.hasText(searchSubject)) {
             searchParamMap.put("search_subject", searchSubject);
@@ -85,9 +108,27 @@ public class BoardController {
 
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("boards", boards);
+        model.addAttribute("boardType", type);
         model.addAttribute("pages", pages);
         model.addAttribute("searchParamMap", searchParamMap);
 
         return String.format("board/%s_list", prefixFile);
     }
+
+    @GetMapping("/{type}/posts/{$id}")
+    public String findAllBoards(
+            @PathVariable String type,
+            Model model) {
+
+        BoardInfo boardInfo = boardCustomConfig.getConfig().get(type);
+
+        if (boardInfo == null) {
+            throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
+        }
+
+        // 파일 prefix 정보 조회
+        String prefixFile = boardInfo.getPrefixFile();
+
+        return String.format("board/%s_read", prefixFile);
+    };
 }

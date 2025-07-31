@@ -16,6 +16,8 @@ public class BoardSpecification {
 
             predicates.add(cb.isNull(root.get("deleteDatetime")));
             predicates.add(cb.equal(root.get("boardType"), request.getBoardType()));
+            predicates.add(cb.greaterThanOrEqualTo(root.get("writeDate"), request.getSearchStartDate()));
+            predicates.add(cb.lessThanOrEqualTo(root.get("writeDate"), request.getSearchEndDate()));
 
             if (request.getWriter() != null && !request.getWriter().isEmpty()) {
                 predicates.add(cb.like(root.get("writer"), "%" + request.getWriter() + "%"));
