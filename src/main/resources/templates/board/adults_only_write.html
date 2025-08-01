@@ -19,6 +19,7 @@
     <h2 class="section-title mb-4" th:text="${pageSubTitle}"></h2>
 
     <form id="board_submit" method="POST" th:object="${board}">
+      <input type="hidden" id="board_type" th:value="${boardType}" />
       <input type="hidden" id="save_from_board_idx" th:field="*{idx}" />
       <div class="mb-4 pb-3 border-bottom">
         <label for="subject" class="form-label fw-bold" style="font-size: 1.75rem; color: white;">

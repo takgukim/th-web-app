@@ -31,13 +31,14 @@ $(function() {
 
     $("#btnSave").on("click", function() {
 
-        const boardIdx = $("#save_from_board_idx").val();
+        const boardIdx = $("#board_submit #save_from_board_idx").val();
+        const boardType = $("#board_submit #board_type").val();
 
         if (confirm("적용하시겠습니까?") === true) {
             if (boardIdx !== "") {
                 boardUpdate(boardIdx);
             } else {
-                boardInsert();
+                boardInsert(boardType);
             }
 
         }
@@ -71,7 +72,7 @@ $(function() {
 /*
  * 게시글 추가
  */
-function boardInsert()
+function boardInsert(boardType)
 {
     $.ajax({
       url: "/api/boards",
@@ -81,7 +82,7 @@ function boardInsert()
         "writer" : $("#board_submit #writer").val(),
         "subject" : $("#board_submit #subject").val(),
         "content" : $("#board_submit #content").val(),
-        "board_type" : "adults_only",
+        "board_type" : boardType,
       }),
       dataType: "json",
       success: function(data, status, xhr) {
@@ -116,7 +117,7 @@ function boardUpdate(id)
         "writer" : $("#board_submit #writer").val(),
         "subject" : $("#board_submit #subject").val(),
         "content" : $("#board_submit #content").val(),
-        "update_user" : $("#board_submit #writer").val()
+        "updateUser" : $("#board_submit #writer").val()
       }),
       success: function(data, status, xhr) {
 
