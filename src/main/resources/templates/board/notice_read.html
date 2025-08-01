@@ -15,43 +15,29 @@
         </div>
     </div>
 
-    <div class="container my-5">
+    <div class="container my-5" th:object="${board}">
         <h2 class="section-title mb-4">상세보기</h2>
 
         <!-- 제목 -->
         <div class="mb-4 pb-3 border-bottom">
-            <h3 class="section-title-detail">📌 이것은 매우 긴 게시글 제목입니다. 길면 ... 말줄임</h3>
+            <h3 class="section-title-detail" th:text="'📌 ' + ${board.subject}"></h3>
         </div>
 
         <!-- 정보 (table) -->
         <table class="detail-info-table">
             <tbody>
-            <tr>
-                <th>작성자</th>
-                <td>홍길동</td>
-            </tr>
-            <tr>
-                <th>연락처</th>
-                <td>010-1234-5678</td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>example@thshop.com</td>
-            </tr>
-            <tr>
-                <th>조회수</th>
-                <td>10,022회</td>
-            </tr>
-            <tr>
-                <th>등록시각</th>
-                <td>2025-07-29 21:59:59</td>
-            </tr>
-            <!--
-            <tr>
-              <th>수정일자</th>
-              <td>2025-07-29</td>
-            </tr>
-            -->
+                <tr>
+                    <th>작성자</th>
+                    <td th:text="*{writer}"></td>
+                </tr>
+                <tr>
+                    <th>조회수</th>
+                    <td th:text="*{readCount} + '회'"></td>
+                </tr>
+                <tr>
+                    <th>등록시각</th>
+                    <td th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
             </tbody>
         </table>
 
@@ -59,33 +45,14 @@
         <div class="mb-4">
             <h5 class="section-subtitle">내용</h5>
             <div class="p-4 border border-secondary rounded bg-dark text-white"
-                 style="min-height: 200px; max-height: 250px; overflow-y: auto; white-space: pre-line;">
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
-                이곳은 게시글의 자세한 내용을 보여주는 공간입니다.
-                줄이 길어질 수도 있고 사용자가 길게 작성한 내용이 표시됩니다.
-                이미지나 문서 등 다양한 설명이 들어갈 수 있습니다.
+                 style="min-height: 200px; max-height: 250px; overflow-y: auto; white-space: pre-line;"
+                 th:text="*{content}">
             </div>
         </div>
 
         <!-- 버튼 -->
-        <div class="text-end mt-5 mb-5">
-            <button type="button" class="btn btn-warning me-2">수정</button>
-            <button type="button" class="btn btn-danger me-2">삭제</button>
-            <button type="button" class="btn btn-secondary">목록</button>
+        <div id="btnLinkGroup" class="text-end mt-5 mb-5" th:data-board_type="*{boardType}">
+            <button type="button" id="btnList" class="btn btn-secondary">목록</button>
         </div>
     </div>
 </div>

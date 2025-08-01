@@ -74,6 +74,15 @@ public class BoardService {
         board.setDeleteDatetime(LocalDateTime.now());
     }
 
+    @Transactional
+    public Board findAndIncreaseReadCount(long id) {
+        Board board = this.findById(id);
+
+        board.setReadCount(board.getReadCount() + 1);
+
+        return board;
+    }
+
     public void delete(Long idx) {
         this.findById(idx);
 

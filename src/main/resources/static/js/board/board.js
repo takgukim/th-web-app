@@ -28,4 +28,25 @@ $(function() {
         $("#search_subject").val("");
         $("#search_writer").val("");
     });
+
+    $("#btnModify").on("click", function() {
+        const boardType = $(this).closest("#btnLinkGroup").data("board_type");
+
+        if (confirm("정보를 수정하시겠습니까?") === true) {
+             $(location).attr("href", `/boards/${boardType}/posts/edit/1`);
+        }
+    });
+
+    $("#btnDelete").on("click", function() {
+        const boardType = $(this).closest("#btnLinkGroup").data("board_type");
+
+        if (confirm("정말로 삭제하시겠습니까?") === true) {
+            // ajax로 처리
+        }
+    });
+
+    $("#btnList").on("click", function() {
+        const boardType = $(this).closest("#btnLinkGroup").data("board_type");
+        $(location).attr("href", `/boards/${boardType}/posts`);
+    });
 });
