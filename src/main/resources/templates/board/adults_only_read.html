@@ -51,7 +51,10 @@
     </div>
 
     <!-- 버튼 -->
-    <div id="btnLinkGroup" class="text-end mt-5 mb-5" th:data-board_type="*{boardType}">
+    <div id="btnLinkGroup"
+         class="text-end mt-5 mb-5"
+         th:data-board_type="*{boardType}"
+         th:data-board_idx="*{idx}">
       <button type="button" id="btnModify" class="btn btn-warning me-2">수정</button>
       <button type="button" id="btnDelete" class="btn btn-danger me-2">삭제</button>
       <button type="button" id="btnList" class="btn btn-secondary">목록</button>

@@ -17,6 +17,55 @@
 
   <div class="container my-5">
     <h2 class="section-title mb-4" th:text="${pageSubTitle}"></h2>
+
+    <form id="board_submit" method="POST" th:object="${board}">
+      <input type="hidden" id="save_from_board_idx" th:field="*{idx}" />
+      <div class="mb-4 pb-3 border-bottom">
+        <label for="subject" class="form-label fw-bold" style="font-size: 1.75rem; color: white;">
+          제목
+        </label>
+        <input type="text"
+               id="subject"
+               name="subject"
+               class="form-control"
+               placeholder="제목을 입력하세요"
+               maxlength="255"
+               th:field="*{subject}"
+               required>
+      </div>
+      <!-- 작성자 정보 (table 스타일 적용) -->
+      <table class="detail-info-table">
+        <tbody>
+          <tr>
+            <th>작성자</th>
+            <td>
+              <input type="text"
+                     id="writer"
+                     name="writer"
+                     class="form-control"
+                     placeholder="작성자 이름"
+                     th:field="*{writer}"
+                     required>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 내용 -->
+      <div class="mb-4">
+        <label for="content" class="form-label section-subtitle">내용</label>
+        <textarea id="content"
+                  name="content"
+                  class="form-control bg-dark text-white"
+                  rows="8"
+                  placeholder="내용을 입력하세요"
+                  th:field="*{content}"
+                  required></textarea>
+      </div>
+      <div id="btnLinkGroup" class="text-end mt-3" th:data-board_type="${boardType}">
+        <button type="button" id="btnSave" class="btn btn-warning me-3">적용</button>
+        <button type="button" id="btnList" class="btn btn-secondary">목록</button>
+      </div>
+    </form>
   </div>
 </div>
 

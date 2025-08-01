@@ -44,10 +44,7 @@ public class TestService {
         board.setWriter(updateBoard.getWriter());
         board.setSubject(updateBoard.getSubject());
         board.setContent(updateBoard.getContent());
-        board.setReadCount(updateBoard.getReadCount());
         board.setUpdateUser(updateBoard.getUpdateUser());
-
-        System.out.println("조회수 = " + board.getReadCount());
 
         board.update(updateBoard);
 

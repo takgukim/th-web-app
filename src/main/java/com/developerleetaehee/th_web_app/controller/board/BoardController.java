@@ -10,10 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -145,6 +142,8 @@ public class BoardController {
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("pageTitle", "글 작성 화면");
         model.addAttribute("pageSubTitle", "작성 화면");
+        model.addAttribute("boardType", type);
+        model.addAttribute("board", Board.builder().build());
 
         return String.format("board/%s_write", prefixFile);
     }
@@ -164,9 +163,14 @@ public class BoardController {
         // 파일 prefix 정보 조회
         String prefixFile = boardInfo.getPrefixFile();
 
+        // 조회수 업데이트 하면서 상세 내용 조회
+        Board board = boardService.findAndIncreaseReadCount(id);
+
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("pageTitle", "글 수정 화면");
         model.addAttribute("pageSubTitle", "수정 화면");
+        model.addAttribute("boardType", type);
+        model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_write", prefixFile);
     }

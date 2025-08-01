@@ -2,9 +2,12 @@ package com.developerleetaehee.th_web_app.dto.board;
 
 import com.developerleetaehee.th_web_app.domain.Board;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class BoardViewResponse {
     private final long idx;
     private final String writer;

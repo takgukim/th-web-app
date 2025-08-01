@@ -109,3 +109,7 @@
  .tr-click-row:active > tr {
    background-color: #f4d35e !important;
  }
+
+ textarea {
+   resize: none;
+ }
