@@ -106,13 +106,13 @@
         <col style="15%" />
       </colgroup>
       <thead class="thead_list">
-      <tr>
-        <th>No</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>등록시각</th>
-        <th>조회수</th>
-      </tr>
+        <tr>
+          <th>No</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>등록시각</th>
+          <th>조회수</th>
+        </tr>
       </thead>
       <tbody>
         <tr th:each="board, stat: ${boards}"
@@ -132,7 +132,7 @@
       </tbody>
     </table>
 
-    <div class="text-end my-3">
+    <div class="text-end my-3" th:if="${boardCustomConfig.pageAccessFlag == true}">
       <a th:href="@{/boards/{boardType}/posts/new(boardType=${boardType})}"
          class="btn btn-warning">✏️ 글쓰기
       </a>

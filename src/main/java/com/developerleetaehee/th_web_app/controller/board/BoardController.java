@@ -138,7 +138,8 @@ public class BoardController {
         model.addAttribute("pageTitle", "글 작성 화면");
         model.addAttribute("pageSubTitle", "작성 화면");
         model.addAttribute("boardType", type);
-        model.addAttribute("board", Board.builder().build());
+        model.addAttribute("boardCustomConfig", boardInfo);
+        model.addAttribute("board", Board.builder().build()); // 초기화 안하면 등록에서 못불러옴
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());
     }
@@ -162,6 +163,7 @@ public class BoardController {
         model.addAttribute("pageTitle", "글 수정 화면");
         model.addAttribute("pageSubTitle", "수정 화면");
         model.addAttribute("boardType", type);
+        model.addAttribute("boardCustomConfig", boardInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());

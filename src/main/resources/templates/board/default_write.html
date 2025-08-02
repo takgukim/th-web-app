@@ -64,7 +64,12 @@
                   required></textarea>
       </div>
       <div id="btnLinkGroup" class="text-end mt-3" th:data-board_type="${boardType}">
-        <button type="button" id="btnSave" class="btn btn-warning me-3">적용</button>
+        <button type="button"
+                id="btnSave"
+                class="btn btn-warning me-3"
+                th:if="${boardCustomConfig.pageAccessFlag == true}">
+          적용
+        </button>
         <button type="button" id="btnList" class="btn btn-secondary">목록</button>
       </div>
     </form>
