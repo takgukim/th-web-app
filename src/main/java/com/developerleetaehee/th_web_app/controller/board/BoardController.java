@@ -87,8 +87,7 @@ public class BoardController {
                         .toList();
 
         // 페이징 정보 조회
-        String prefixFile = boardInfo.getPrefixFile();
-        String pageUrl = String.format("/boards/%s/posts", prefixFile);
+        String pageUrl = String.format("/boards/%s/posts", type);
 
         Page<Board> boardPage = boardService.getBoardPage(boardSearchRequest);
         String queryString = PaginationUtil.buildQueryStringFromMap(searchParamMap);
@@ -97,10 +96,11 @@ public class BoardController {
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("boards", boards);
         model.addAttribute("boardType", type);
+        model.addAttribute("boardCustomConfig", boardInfo);
         model.addAttribute("pages", pages);
         model.addAttribute("searchParamMap", searchParamMap);
 
-        return String.format("board/%s_list", prefixFile);
+        return String.format("board/%s_list", boardInfo.getPrefixFile());
     }
 
     @GetMapping("/{type}/posts/{id}")
@@ -115,16 +115,14 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
-        // 파일 prefix 정보 조회
-        String prefixFile = boardInfo.getPrefixFile();
-
         // 조회수 업데이트 하면서 상세 내용 조회
         Board board = boardService.findAndIncreaseReadCount(id);
 
         model.addAttribute("title", boardInfo.getPageTitle());
+        model.addAttribute("boardCustomConfig", boardInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
-        return String.format("board/%s_read", prefixFile);
+        return String.format("board/%s_read", boardInfo.getPrefixFile());
     };
 
     @GetMapping("/{type}/posts/new")
@@ -136,16 +134,13 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
-        // 파일 prefix 정보 조회
-        String prefixFile = boardInfo.getPrefixFile();
-
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("pageTitle", "글 작성 화면");
         model.addAttribute("pageSubTitle", "작성 화면");
         model.addAttribute("boardType", type);
         model.addAttribute("board", Board.builder().build());
 
-        return String.format("board/%s_write", prefixFile);
+        return String.format("board/%s_write", boardInfo.getPrefixFile());
     }
 
     @GetMapping("/{type}/posts/edit/{id}")
@@ -160,9 +155,6 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
-        // 파일 prefix 정보 조회
-        String prefixFile = boardInfo.getPrefixFile();
-
         // 조회수 업데이트 하면서 상세 내용 조회
         Board board = boardService.findAndIncreaseReadCount(id);
 
@@ -172,6 +164,6 @@ public class BoardController {
         model.addAttribute("boardType", type);
         model.addAttribute("board", new BoardViewResponse(board));
 
-        return String.format("board/%s_write", prefixFile);
+        return String.format("board/%s_write", boardInfo.getPrefixFile());
     }
 }

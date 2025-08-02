@@ -7,5 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class BoardInfo {
     private String pageTitle;
+    private String pageDescription;
+    private String pageSubTitle;
     private String prefixFile;
+    private boolean pageAccessFlag;
 }

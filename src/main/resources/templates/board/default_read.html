@@ -10,8 +10,8 @@
   <div class="main-hero">
     <img src="https://picsum.photos/id/1018/1600/800" alt="">
     <div class="hero-caption">
-      <h1>성인전용</h1>
-      <p>성인전용 게시판입니다. 19세 미만 출입금지입니다.</p>
+      <h1 th:text="${boardCustomConfig.pageTitle}"></h1>
+      <p th:text="${boardCustomConfig.pageDescription}"></p>
     </div>
   </div>
 
@@ -26,18 +26,18 @@
     <!-- 정보 (table) -->
     <table class="detail-info-table">
       <tbody>
-      <tr>
-        <th>작성자</th>
-        <td th:text="*{writer}"></td>
-      </tr>
-      <tr>
-        <th>조회수</th>
-        <td th:text="*{readCount} + '회'"></td>
-      </tr>
-      <tr>
-        <th>등록시각</th>
-        <td th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-      </tr>
+        <tr>
+          <th>작성자</th>
+          <td th:text="*{writer}"></td>
+        </tr>
+        <tr>
+          <th>조회수</th>
+          <td th:text="*{readCount} + '회'"></td>
+        </tr>
+        <tr>
+          <th>등록시각</th>
+          <td th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
       </tbody>
     </table>
 
