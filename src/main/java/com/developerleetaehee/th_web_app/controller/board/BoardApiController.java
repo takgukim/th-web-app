@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,11 +41,21 @@ public class BoardApiController {
             @RequestParam(name = "per_page", defaultValue = "10") int perPage,
             @RequestParam(required = false) String writer,
             @RequestParam(required = false) String subject,
-            @RequestParam(name = "board_type") String boardType
+            @RequestParam(name = "board_type") String boardType,
+            @RequestParam(name = "start_date", defaultValue = "") String startDate,
+            @RequestParam(name = "end_date", defaultValue = "") String endDate
     ) {
         BoardInfo boardInfo = boardCustomConfig.getConfig().get(boardType);
+
         if (boardInfo == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "해당 타입 없음");
+        }
+
+        if (startDate == null || startDate.isBlank()) {
+            startDate = LocalDate.now().minusMonths(1).toString();
+        }
+        if (endDate == null || endDate.isBlank()) {
+            endDate = LocalDate.now().toString();
         }
 
         // 검색을 위한 설정
@@ -53,6 +64,8 @@ public class BoardApiController {
         boardSearchRequest.setWriter(writer);
         boardSearchRequest.setSubject(subject);
         boardSearchRequest.setBoardType(boardType);
+        boardSearchRequest.setSearchStartDate(startDate);
+        boardSearchRequest.setSearchEndDate(endDate);
 
         List<BoardResponse> boards = boardService.findAll(boardSearchRequest)
                 .stream()

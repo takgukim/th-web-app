@@ -18,6 +18,7 @@ public class AddBoardRequest {
 
     private String content;
 
+    @JsonProperty("write_date")
     private String writeDate;
 
     @JsonProperty("board_type")

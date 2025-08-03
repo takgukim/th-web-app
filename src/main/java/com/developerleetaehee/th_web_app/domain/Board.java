@@ -29,6 +29,7 @@ public class Board {
     private String content;
 
     @Column(name = "write_date", nullable = false, updatable = false, length = 8)
+    @JsonProperty("write_date")
     private String writeDate;
 
     @Column(name = "board_type", nullable = false, updatable = false, length = 30)

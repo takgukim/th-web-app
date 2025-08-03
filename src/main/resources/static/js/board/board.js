@@ -87,6 +87,8 @@ function boardInsert(boardType)
       dataType: "json",
       success: function(data, status, xhr) {
 
+        console.log("상태코드" + xhr.status);
+
         if (xhr.status === 201) {
             // 조회는 200, 삭제 204, 생성 되면 201, 수정 200
             alert("적용되었습니다.");
@@ -94,8 +96,6 @@ function boardInsert(boardType)
             // 상세보기로 이동
             $(location).attr("href", `/boards/adults_only/posts/${data.idx}`);
         }
-
-        console.log("상태코드" + xhr.status);
       },
       error: function(xhr, status, err) {
         alert("error : " + xhr.status);
@@ -121,6 +121,8 @@ function boardUpdate(id)
       }),
       success: function(data, status, xhr) {
 
+         console.log("상태코드" + xhr.status);
+
          if (xhr.status === 200) {
             // 조회는 200, 삭제 204, 생성 되면 201, 수정 200
             alert("수정되었습니다.");
@@ -128,8 +130,6 @@ function boardUpdate(id)
             // 상세보기로 이동
             $(location).attr("href", `/boards/adults_only/posts/${id}`);
          }
-
-         console.log("상태코드" + xhr.status);
       },
       error: function(xhr, status, err) {
         alert("error : " + xhr.status);
