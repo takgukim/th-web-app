@@ -30,17 +30,15 @@ $(function() {
     });
 
     $("#btnSave").on("click", function() {
-
         const boardIdx = $("#board_submit #save_from_board_idx").val();
         const boardType = $("#board_submit #board_type").val();
 
         if (confirm("적용하시겠습니까?") === true) {
             if (boardIdx !== "") {
-                boardUpdate(boardIdx);
+                //boardUpdate(boardIdx);
             } else {
                 boardInsert(boardType);
             }
-
         }
     });
 
@@ -74,33 +72,23 @@ $(function() {
  */
 function boardInsert(boardType)
 {
-    $.ajax({
-      url: "/api/boards",
-      contentType: "application/json",
-      method: "POST",
-      data: JSON.stringify({
+    const data = {
         "writer" : $("#board_submit #writer").val(),
         "subject" : $("#board_submit #subject").val(),
         "content" : $("#board_submit #content").val(),
-        "board_type" : boardType,
-      }),
-      dataType: "json",
-      success: function(data, status, xhr) {
+        "board_type" : boardType
+    };
 
-        console.log("상태코드" + xhr.status);
+    let requestParams =  {
+        url: "/api/boards",
+        method: "POST",
+        header: "application/json",
+        params: JSON.stringify(data),
+        callback: callbackInsert,
+        callbackParams: data
+    };
 
-        if (xhr.status === 201) {
-            // 조회는 200, 삭제 204, 생성 되면 201, 수정 200
-            alert("적용되었습니다.");
-
-            // 상세보기로 이동
-            $(location).attr("href", `/boards/adults_only/posts/${data.idx}`);
-        }
-      },
-      error: function(xhr, status, err) {
-        alert("error : " + xhr.status);
-      }
-    });
+    requestAjax(requestParams);
 }
 
 /*
@@ -135,4 +123,10 @@ function boardUpdate(id)
         alert("error : " + xhr.status);
       }
     });
+}
+
+function callbackInsert(data, params)
+{
+  // 상세보기로 이동
+  $(location).attr("href", `/boards/${params.board_type}/posts/${data.idx}`);
 }

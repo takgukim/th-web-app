@@ -34,3 +34,58 @@
 
    return new Date(prevYear, prevMonth, newDay);
  }
+
+ /*
+  * ajax 비동기 처리
+  */
+  function requestAjax(requestParams)
+  {
+     if (requestParams === undefined || requestParams === null) {
+  		return;
+  	}
+
+  	const url = requestParams.url;
+  	const httpMethod = requestParams.method;
+  	const httpHeader = requestParams.header || "application/json";
+  	const params = requestParams.params;
+  	const callback = requestParams.callback;
+  	const callbackParams = requestParams.callbackParams;
+
+     $.ajax({
+       url: url,
+       contentType: httpHeader,
+       method: httpMethod,
+       data: params,
+       dataType: "json",
+       success: function(data, status, xhr) {
+
+         console.log("상태코드" + xhr.status);
+
+         if (xhr === null || xhr === undefined) {
+         	alert("관리자에게 문의해주세요.");
+         	return;
+         }
+
+         if (callback instanceof Function) {
+             // 콜백함수 실행
+         	callback(data, callbackParams);
+         }
+
+         switch (xhr.status) {
+             case 200:
+             case 201:
+             case 204:
+                 // 정상
+                 break;
+             default:
+                 // 상태값이 제대로 안 온 경우 확인을 위해 필요
+                 alert(`정상적인 처리가 되지 않았습니다.\n관리자에게 문의하세요`);
+                 break;
+         }
+
+       },
+       error: function(xhr, status, err) {
+         alert("error : " + xhr.status);
+       }
+     });
+  }
