@@ -8,7 +8,7 @@
   </th:block>
 
   <div class="main-hero">
-    <img src="https://picsum.photos/id/1018/1600/800" alt="">
+    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
       <h1 th:text="${boardCustomConfig.pageTitle}"></h1>
       <p th:text="${boardCustomConfig.pageDescription}"></p>
@@ -20,7 +20,7 @@
 
     <!-- 제목 -->
     <div class="mb-4 pb-3 border-bottom">
-      <h3 class="section-title-detail" th:text="'📌 ' + ${board.subject}"></h3>
+      <h3 class="section-title-detail" th:text="'📌 ' + *{subject}"></h3>
     </div>
 
     <!-- 정보 (table) -->
@@ -54,7 +54,8 @@
     <div id="btnLinkGroup"
          class="text-end mt-5 mb-5"
          th:data-board_type="*{boardType}"
-         th:data-board_idx="*{idx}">
+         th:data-board_idx="*{idx}"
+         th:data-board_writer="*{writer}">
       <button type="button"
               id="btnModify"
               class="btn btn-warning me-2"

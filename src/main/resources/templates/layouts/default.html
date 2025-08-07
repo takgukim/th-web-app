@@ -18,6 +18,11 @@
         <layout:insert name="custom_css"></layout:insert>
     </head>
     <body>
+        <div id="loading-spinner">
+            <div class="spinner"></div>
+            <div class="loading-text">로딩 중입니다.<br>잠시만 기다려 주세요...</div>
+        </div>
+
         <!-- 메뉴 헤더 영역 -->
         <nav th:replace="fragments/header :: header"></nav>
 

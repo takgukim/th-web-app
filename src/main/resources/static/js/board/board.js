@@ -35,7 +35,7 @@ $(function() {
 
         if (confirm("적용하시겠습니까?") === true) {
             if (boardIdx !== "") {
-                //boardUpdate(boardIdx);
+                boardUpdate(boardIdx, boardType);
             } else {
                 boardInsert(boardType);
             }
@@ -58,6 +58,7 @@ $(function() {
 
         if (confirm("정말로 삭제하시겠습니까?") === true) {
             // ajax로 처리
+            boardSoftDelete($(this));
         }
     });
 
@@ -82,7 +83,7 @@ function boardInsert(boardType)
     let requestParams =  {
         url: "/api/boards",
         method: "POST",
-        header: "application/json",
+        headers: "application/json",
         params: JSON.stringify(data),
         callback: callbackInsert,
         callbackParams: data
@@ -94,39 +95,82 @@ function boardInsert(boardType)
 /*
  * 게시글 업데이트
  */
-function boardUpdate(id)
+function boardUpdate(id, boardType)
 {
-    $.ajax({
-      url: `/api/boards/${id}`,
-      contentType: "application/json",
-      method: "PUT",
-      dataType: "json",
-      data: JSON.stringify({
+    const data = {
         "writer" : $("#board_submit #writer").val(),
         "subject" : $("#board_submit #subject").val(),
         "content" : $("#board_submit #content").val(),
         "updateUser" : $("#board_submit #writer").val()
-      }),
-      success: function(data, status, xhr) {
+    };
 
-         console.log("상태코드" + xhr.status);
+    const params = {
+        "board_type" : boardType,
+    };
 
-         if (xhr.status === 200) {
-            // 조회는 200, 삭제 204, 생성 되면 201, 수정 200
-            alert("수정되었습니다.");
+    let requestParams =  {
+        url: `/api/boards/${id}`,
+        method: "PUT",
+        headers: "application/json",
+        params: JSON.stringify(data),
+        callback: callbackUpdate,
+        callbackParams: params
+    };
 
-            // 상세보기로 이동
-            $(location).attr("href", `/boards/adults_only/posts/${id}`);
-         }
-      },
-      error: function(xhr, status, err) {
-        alert("error : " + xhr.status);
-      }
-    });
+    requestAjax(requestParams);
 }
 
+/*
+ * 게시글 삭제 (소프트삭제)
+ */
+function boardSoftDelete($this)
+{
+    const $btnLinkGroup = $this.closest("#btnLinkGroup");
+
+    const boardType = $btnLinkGroup.data("board_type");
+    const boardIdx = $btnLinkGroup.data("board_idx");
+    const boardWriter = $btnLinkGroup.data("board_writer");
+
+    const data = {
+        "delete_user" : boardWriter,
+    };
+
+    const params = {
+        "board_type" : boardType,
+    };
+
+    let requestParams =  {
+        url: `/api/boards/${boardIdx}/soft-delete`,
+        method: "PATCH",
+        headers: "application/json",
+        params: JSON.stringify(data),
+        callback: callbackDelete,
+        callbackParams: params
+    };
+
+    requestAjax(requestParams);
+}
+
+/*
+ * 게시판 데이터 추가 후 콜백 함수
+ */
 function callbackInsert(data, params)
 {
-  // 상세보기로 이동
   $(location).attr("href", `/boards/${params.board_type}/posts/${data.idx}`);
+}
+
+/*
+ * 게시판 데이터 수정 후 콜백 함수
+ */
+function callbackUpdate(data, params)
+{
+  $(location).attr("href", `/boards/${params.board_type}/posts/${data.idx}`);
+}
+
+/*
+ * 게시판 데이터 삭제 후 콜백 함수
+ */
+function callbackDelete(data, params)
+{
+  $(location).attr("href", `/boards/${params.board_type}/posts`);
 }

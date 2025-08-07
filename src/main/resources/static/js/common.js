@@ -7,6 +7,10 @@
  const FLATPICKR_COMMON_TODAY = flatpickr.formatDate(new Date(COMMON_TODAY), 'Y-m-d');
  const FLATPICKR_ONE_MONTH = flatpickr.formatDate(new Date(COMMON_ONE_MONTH), 'Y-m-d');
 
+ $(window).on('load', function () {
+    $('#loading-spinner').fadeOut('slow');
+ });
+
  $(function() {
     console.log("common.js");
  });
@@ -46,10 +50,12 @@
 
   	const url = requestParams.url;
   	const httpMethod = requestParams.method;
-  	const httpHeader = requestParams.header || "application/json";
+  	const httpHeader = requestParams.headers || "application/json";
   	const params = requestParams.params;
   	const callback = requestParams.callback;
-  	const callbackParams = requestParams.callbackParams;
+  	const callbackParams = requestParams.callbackParams || null;
+
+  	$('#loading-spinner').show(); // 로딩 스피너 표시
 
      $.ajax({
        url: url,
@@ -83,6 +89,9 @@
                  break;
          }
 
+       },
+       complete: function(xhr, status, err) {
+          $('#loading-spinner').hide(); // 완료되면 로딩 스피너 숨김
        },
        error: function(xhr, status, err) {
          alert("error : " + xhr.status);

@@ -56,6 +56,7 @@ public class Board {
     private LocalDateTime deleteDatetime;
 
     @Column(name = "delete_user", length = 30)
+    @JsonProperty("delete_user")
     private String deleteUser;
 
     public void update(Board board) {

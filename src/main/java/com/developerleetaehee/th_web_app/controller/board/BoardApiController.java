@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -119,14 +120,13 @@ public class BoardApiController {
 
     @PatchMapping("/{id}/soft-delete")
     @Operation(summary = "게시글 소프트 삭제", description = "특정 데이터를 테이블에서 지우지 않고 플래그로 처리합니다.")
-    public ResponseEntity<Void> softDeleteBoard(
+    public ResponseEntity<Map<String, String>> softDeleteBoard(
             @PathVariable long id,
             @RequestBody DeleteBoardRequest request) {
 
         boardService.softDelete(id, request);
 
-        return ResponseEntity.ok()
-                .build();
+        return ResponseEntity.ok(Map.of("message", "soft delete success"));
     }
 
     @DeleteMapping("/{id}")
