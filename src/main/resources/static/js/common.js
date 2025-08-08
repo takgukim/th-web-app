@@ -55,11 +55,17 @@
   	const callback = requestParams.callback;
   	const callbackParams = requestParams.callbackParams || null;
 
+  	const csrfHeader = $("meta[name='_csrf_header']").attr("content");
+  	const csrfToken = $("meta[name='_csrf']").attr("content");
+
   	$('#loading-spinner').show(); // 로딩 스피너 표시
 
      $.ajax({
        url: url,
        contentType: httpHeader,
+       headers: {
+        [csrfHeader] : csrfToken
+       },
        method: httpMethod,
        data: params,
        dataType: "json",
