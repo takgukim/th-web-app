@@ -1,0 +1,151 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layouts/default}"
+     layout:fragment="content">
+
+  <div class="main-hero">
+    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
+    <div class="hero-caption">
+      <h1>상품목록</h1>
+      <p>티에이치 쇼핑몰 제품 소개해드려요.</p>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <div class="section-title">상품몰</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_01.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_02.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_03.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_01.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_02.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-dark text-white product-card">
+          <img th:src="@{/images/sample_shop_product_03.jpg}" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              🔖 <span class="fw-bold">상품 제목</span>
+            </h5>
+            <p class="card-text mt-2 text-ellipsis">
+              💬 <span style="color:#ccc;">상품 설명</span>
+            </p>
+            <p class="card-text mt-2">
+              💰 <span class="text-warning fw-bold">상품 가격</span>
+            </p>
+            <p class="card-text mt-2">
+              🔧
+              <span class="me-2">✅ 옵션1</span>
+              <span class="me-2">💦 옵션2</span>
+              <span class="me-2">♾️ 옵션3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

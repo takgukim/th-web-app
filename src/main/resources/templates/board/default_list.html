@@ -133,7 +133,7 @@
     </table>
 
     <div class="text-end my-3" th:if="${boardCustomConfig.pageAccessFlag == true}">
-      <a th:href="@{/boards/{boardType}/posts/new(boardType=${boardType})}"
+      <a th:href="@{/board/{boardType}/posts/new(boardType=${boardType})}"
          class="btn btn-warning">✏️ 글쓰기
       </a>
     </div>

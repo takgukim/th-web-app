@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/boards")
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
@@ -87,7 +87,7 @@ public class BoardController {
                         .toList();
 
         // 페이징 정보 조회
-        String pageUrl = String.format("/boards/%s/posts", type);
+        String pageUrl = String.format("/board/%s/posts", type);
 
         Page<Board> boardPage = boardService.getBoardPage(boardSearchRequest);
         String queryString = PaginationUtil.buildQueryStringFromMap(searchParamMap);

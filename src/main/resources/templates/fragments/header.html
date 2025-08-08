@@ -1,35 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-dark" th:fragment="header">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">티에이치 쇼핑몰</a>
+        <a class="navbar-brand" th:href="@{/}">티에이치 쇼핑몰</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/intro/company">회사소개</a>
+                    <a class="nav-link" th:href="@{/intro/company}">회사소개</a>
                 </li>
 
                 <li class="navi-item">
-                    <a class="nav-link" href="#">이벤트신청</a>
+                    <a class="nav-link" th:href="@{/shop}">상품몰</a>
                 </li>
 
                 <li class="navi-item">
-                    <a class="nav-link" href="#">상품몰</a>
+                    <a class="nav-link" th:href="@{/counsel/write}">상담신청</a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">커뮤니티</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/boards/notice/posts">공지사항</a></li>
-                        <li><a class="dropdown-item" href="/boards/free/posts">자유게시판</a></li>
-                        <li><a class="dropdown-item" href="/boards/qna/posts">질의응답</a></li>
-                        <li><a class="dropdown-item" href="/boards/adults_only/posts">성인전용</a></li>
+                        <li><a class="dropdown-item" th:href="@{/board/notice/posts}">공지사항</a></li>
+                        <li><a class="dropdown-item" th:href="@{/board/free/posts}">자유게시판</a></li>
+                        <li><a class="dropdown-item" th:href="@{/board/qna/posts}">질의응답</a></li>
+                        <li><a class="dropdown-item" th:href="@{/board/adults_only/posts}">성인전용</a></li>
                     </ul>
                 </li>
 
                 <li class="navi-item">
-                    <a class="nav-link" href="/intro/map">찾아오는길</a>
+                    <a class="nav-link" th:href="@{/intro/map}">찾아오는길</a>
                 </li>
 
                 <!-- PC용 로그인 아이콘 -->

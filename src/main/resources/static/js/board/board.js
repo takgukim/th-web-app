@@ -15,7 +15,7 @@ $(function() {
             return;
        }
 
-       $(location).attr('href', `/boards/${boardType}/posts/${id}`);
+       $(location).attr('href', `/board/${boardType}/posts/${id}`);
     });
 
     $("#btnSearch").on("click", function() {
@@ -49,7 +49,7 @@ $(function() {
         const boardIdx = $tr.data("board_idx");
 
         if (confirm("정보를 수정하시겠습니까?") === true) {
-             $(location).attr("href", `/boards/${boardType}/posts/edit/${boardIdx}`);
+             $(location).attr("href", `/board/${boardType}/posts/edit/${boardIdx}`);
         }
     });
 
@@ -64,7 +64,7 @@ $(function() {
 
     $("#btnList").on("click", function() {
         const boardType = $(this).closest("#btnLinkGroup").data("board_type");
-        $(location).attr("href", `/boards/${boardType}/posts`);
+        $(location).attr("href", `/board/${boardType}/posts`);
     });
 });
 
@@ -156,7 +156,7 @@ function boardSoftDelete($this)
  */
 function callbackInsert(data, params)
 {
-  $(location).attr("href", `/boards/${params.board_type}/posts/${data.idx}`);
+  $(location).attr("href", `/board/${params.board_type}/posts/${data.idx}`);
 }
 
 /*
@@ -164,7 +164,7 @@ function callbackInsert(data, params)
  */
 function callbackUpdate(data, params)
 {
-  $(location).attr("href", `/boards/${params.board_type}/posts/${data.idx}`);
+  $(location).attr("href", `/board/${params.board_type}/posts/${data.idx}`);
 }
 
 /*
@@ -172,5 +172,5 @@ function callbackUpdate(data, params)
  */
 function callbackDelete(data, params)
 {
-  $(location).attr("href", `/boards/${params.board_type}/posts`);
+  $(location).attr("href", `/board/${params.board_type}/posts`);
 }
