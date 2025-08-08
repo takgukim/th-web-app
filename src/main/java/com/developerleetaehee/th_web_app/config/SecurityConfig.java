@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .httpBasic(httpBasic -> httpBasic.disable())
                 // IF_REQUIRED, STATELESS
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         // authenticated() : 로그인 기반 , permitAll() : 모두
                         .requestMatchers("/api/**").permitAll()
