@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CsrfTokenController {
     @GetMapping
     public CsrfToken csrfToken(HttpServletRequest request) {
+        // 세션 강제 생성 (여기가 핵심)
+        request.getSession(true);
+
         return (CsrfToken) request.getAttribute(CsrfToken.class.getName());
     }
 }

@@ -3,12 +3,6 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
-  <th:block layout:fragment="custom_css">
-    <style>
-
-    </style>
-  </th:block>
-
   <div class="main-hero">
     <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
@@ -18,7 +12,7 @@
   </div>
   <div class="container my-5">
     <div class="row">
-      <div class="col-12 px-0 px-md-3">
+      <div class="col-12 px-3 px-md-3">
 
         <!-- 신청방법 안내 -->
         <div class="bg-secondary bg-opacity-25 p-3 rounded text-white mb-4">
@@ -35,6 +29,8 @@
             </li>
           </ul>
         </div>
+
+        <h2 class="section-title mb-4">상담 신청</h2>
 
         <div class="d-flex justify-content-end mb-3">
           <a href="#" class="btn btn-warning btn-sm" role="button">📋 전체 상담현황 조회</a>
