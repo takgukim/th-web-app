@@ -5,18 +5,7 @@
 
   <th:block layout:fragment="custom_css">
     <style>
-      /* 탭 */
-      .nav-tabs {
-        display: flex;
-      }
-      .nav-tabs .nav-item {
-        flex: 1 1 50%;
-        text-align: center;
-      }
-      .nav-tabs .nav-link {
-        width: 100%;
-        border-radius: 0;
-      }
+
     </style>
   </th:block>
 
@@ -27,25 +16,35 @@
       <p>상담신청 하시면 상담사가 답변드려요.</p>
     </div>
   </div>
-
   <div class="container my-5">
-    <div class="d-flex justify-content-center">
-      <div class="col-lg-8">
-        <!-- 탭 -->
-        <ul class="nav nav-tabs mb-4">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">신청</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">조회</a>
-          </li>
-        </ul>
+    <div class="row">
+      <div class="col-12 px-0 px-md-3">
 
-        <form class="bg-dark p-4 rounded">
+        <!-- 신청방법 안내 -->
+        <div class="bg-secondary bg-opacity-25 p-3 rounded text-white mb-4">
+          <h5 class="mb-3">📌 신청방법 안내</h5>
+          <ul class="mb-0" style="list-style-type: disc; padding-left: 1.2rem;">
+            <li>📬 <strong>신청 후 1-2일 이내</strong>에 답변이 발송됩니다.</li>
+            <li>📞 연락처 <span style="color: #FFD700; font-weight: bold;">오타</span>가 없도록 꼭 확인해 주세요.</li>
+            <li>🚫 다른 사람의 번호로 등록하는 것은 <strong style="color: #FF4500;">금지</strong>됩니다.</li>
+            <li>⚠️ <strong style="color: #FF0000; font-size: 1.05rem;">
+              욕설, 비방, 협박 등은 형사처벌 대상입니다.
+            </strong><br />
+              🙏 상담사도 누군가의 가족입니다.<br />
+              존중하는 마음으로 대화해 주세요.
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex justify-content-end mb-3">
+          <a href="#" class="btn btn-warning btn-sm" role="button">📋 전체 상담현황 조회</a>
+        </div>
+
+        <form class="bg-dark p-4 rounded mx-auto">
           <!-- 이름 -->
           <div class="mb-3">
             <label for="name" class="form-label">이름</label>
-            <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요">
+            <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요" />
           </div>
 
           <!-- 연락방법 -->
@@ -53,55 +52,26 @@
             <label class="form-label">연락방법</label>
             <div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="contactMethod" id="contactPhone" value="phone">
+                <input class="form-check-input" type="radio" name="contactMethod" id="contactPhone" value="phone" />
                 <label class="form-check-label" for="contactPhone">전화</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="contactMethod" id="contactEmail" value="email">
+                <input class="form-check-input" type="radio" name="contactMethod" id="contactEmail" value="email" />
                 <label class="form-check-label" for="contactEmail">이메일</label>
               </div>
             </div>
           </div>
 
-          <!-- 핸드폰 -->
+          <!-- 휴대폰 번호 -->
           <div class="mb-3">
-            <label class="form-label">핸드폰</label>
-            <div class="row g-2">
-              <div class="col-4 col-md-3">
-                <select class="form-select" id="phonePrefix">
-                  <option value="">선택</option>
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
-                </select>
-              </div>
-              <div class="col-4 col-md-4">
-                <input type="number" class="form-control" id="phoneMid" placeholder="중간번호">
-              </div>
-              <div class="col-4 col-md-4">
-                <input type="number" class="form-control" id="phoneEnd" placeholder="끝번호">
-              </div>
-            </div>
+            <label for="phone" class="form-label">휴대폰 번호</label>
+            <input type="text" id="phone" name="phone" class="form-control" placeholder="📱 예: 01012345678" pattern="\d*" />
           </div>
 
+          <!-- 이메일 -->
           <div class="mb-3">
-            <label for="emailId" class="form-label">이메일</label>
-            <div class="email-input-group" style="display:flex; gap:0.5rem; align-items:center; flex-wrap: nowrap;">
-              <input type="text" class="form-control" id="emailId" placeholder="아이디" style="flex:1 1 150px; min-width:120px;">
-              <span>@</span>
-              <input type="text" class="form-control" id="emailDomainInput" placeholder="도메인 입력" style="flex:1 1 150px; min-width:120px;" readonly>
-              <select class="form-select" id="emailDomainSelect" style="flex:0 0 120px;">
-                <option value="">선택하세요.</option>
-                <option value="gmail.com">구글</option>
-                <option value="naver.com">네이버</option>
-                <option value="kakao.com">카카오</option>
-                <option value="icloud.com">애플</option>
-                <option value="etc">기타</option>
-              </select>
-            </div>
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="📧 예: example@mail.com" />
           </div>
 
           <!-- 상담종류 -->
