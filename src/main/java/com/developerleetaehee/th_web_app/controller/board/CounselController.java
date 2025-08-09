@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CounselController {
 
     @GetMapping("/write")
-    public String writeCounsel(Model model) {
+    public String writeForm(Model model) {
         model.addAttribute("title", "상담신청");
 
         return "board/counsel_write";
