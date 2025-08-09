@@ -3,6 +3,90 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
+  <th:block layout:fragment="custom_css">
+    <style>
+      .timeline {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background-color: #444;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+        border-radius: 2px;
+      }
+      .timeline-item {
+        padding: 15px 40px;
+        position: relative;
+        width: 50%;
+        color: #eee;
+      }
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ffc107;
+        border-radius: 50%;
+        top: 20px;
+        border: 3px solid #222;
+        z-index: 1;
+      }
+      .timeline-item.left {
+        left: 0;
+        text-align: right;
+      }
+      .timeline-item.left::after {
+        right: -12px;
+      }
+      .timeline-item.right {
+        left: 50%;
+        text-align: left;
+      }
+      .timeline-item.right::after {
+        left: -12px;
+      }
+      .timeline-item .date {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: #ffc107;
+      }
+      .timeline-item .desc {
+        font-size: 0.9rem;
+        line-height: 1.3;
+      }
+      @media (max-width: 768px) {
+        .timeline::after {
+          left: 8px;
+        }
+        .timeline-item {
+          width: 100%;
+          padding-left: 30px;
+          padding-right: 15px;
+          text-align: left !important;
+          margin-bottom: 30px;
+        }
+        .timeline-item.left, .timeline-item.right {
+          left: 0 !important;
+        }
+        .timeline-item::after {
+          top: 15px;
+          left: 0 !important;
+          right: auto !important;
+          margin: 0;
+        }
+      }
+    </style>
+  </th:block>
+
   <div class="main-hero">
     <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
@@ -12,5 +96,90 @@
   </div>
 
   <div class="container my-5">
+    <h2 class="section-title mb-4">회사 연혁</h2>
+
+    <div class="timeline">
+      <!-- 2016 -->
+      <div class="timeline-item left">
+        <div class="date">2016.01</div>
+        <div class="desc">무른모 개발자 시작</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2016.02</div>
+        <div class="desc">무른모 로트추적시스템 분석</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2016.05</div>
+        <div class="desc">무른모 치공구시스템 개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2016.11</div>
+        <div class="desc">무른모 일학습병행제 시작</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2017.10</div>
+        <div class="desc">FTA 시스템개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2018.01</div>
+        <div class="desc">무른모 차세대 버전 개발 (스프링)</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2018.05</div>
+        <div class="desc">무른모 차세대 버전 개발 (PHP)</div>
+      </div>
+
+      <!-- 2019 ~ 2022 -->
+      <div class="timeline-item right">
+        <div class="date">2019.11</div>
+        <div class="desc">케빈랩 개발자 시작</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2019.11</div>
+        <div class="desc">건물에너지관리시스템 분석</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2019.12</div>
+        <div class="desc">건물에너지관리시스템 단독주택개발</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2020.06</div>
+        <div class="desc">건물에너지관리시스템 국립공원 개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2021.02</div>
+        <div class="desc">건물에너지관리스템 리뉴얼</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2021.08</div>
+        <div class="desc">공장에너지관리시스템 개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2022.05</div>
+        <div class="desc">TOC개발</div>
+      </div>
+
+      <!-- 2023 ~ 2025 -->
+      <div class="timeline-item left">
+        <div class="date">2023.03</div>
+        <div class="desc">365mc 병원 마케팅시스템 개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2023.05</div>
+        <div class="desc">365mc 마케팅관리자 시스템 개발</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2024.02</div>
+        <div class="desc">365mc 랜딩페이지 개발</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="date">2025.05</div>
+        <div class="desc">365mc 병원설문지개발</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="date">2025.07</div>
+        <div class="desc">티에이치스터디 쇼핑몰 개발</div>
+      </div>
+    </div>
   </div>
 </div>
