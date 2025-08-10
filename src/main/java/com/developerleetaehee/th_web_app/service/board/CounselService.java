@@ -89,7 +89,7 @@ public class CounselService {
 
     public void delete(long id) {
 
-        // 진행상태가 대기인것마 삭제
+        // 진행상태가 대기인것만 삭제
         this.findByIdAndProgressState(id, "pending");
 
         counselRepository.deleteById(id);
