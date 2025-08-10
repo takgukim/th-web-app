@@ -29,7 +29,7 @@ public class BoardApiController {
     private final BoardService boardService;
 
     @Autowired
-    private final BoardCustomConfig boardCustomConfig;
+    private final BoardCustomCode boardCustomCode;
 
     @GetMapping
     @Operation(summary = "게시글 전체 조회", description = "조건과 페이징으로 조회합니다.")
@@ -46,7 +46,7 @@ public class BoardApiController {
             @RequestParam(name = "start_date", defaultValue = "") String startDate,
             @RequestParam(name = "end_date", defaultValue = "") String endDate
     ) {
-        BoardInfo boardInfo = boardCustomConfig.getConfig().get(boardType);
+        BoardInfo boardInfo = boardCustomCode.getCode().get(boardType);
 
         if (boardInfo == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "해당 타입 없음");
@@ -70,7 +70,7 @@ public class BoardApiController {
 
         List<BoardResponse> boards = boardService.findAll(boardSearchRequest)
                 .stream()
-                .map(BoardResponse::new)
+                .map(entity -> new BoardResponse(entity, boardCustomCode))
                 .toList();
 
         return ResponseEntity.ok()
@@ -83,7 +83,7 @@ public class BoardApiController {
         Board board = boardService.findById(id);
 
         return ResponseEntity.ok()
-                .body(new BoardResponse(board));
+                .body(new BoardResponse(board, boardCustomCode));
     }
 
     @PostMapping
@@ -103,7 +103,7 @@ public class BoardApiController {
         Board savedBoard = boardService.save(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new BoardResponse(savedBoard));
+                .body(new BoardResponse(savedBoard, boardCustomCode));
     }
 
     @PutMapping("/{id}")
@@ -115,7 +115,7 @@ public class BoardApiController {
         Board updateBoard = boardService.update(id, request);
 
         return ResponseEntity.ok()
-                .body(new BoardResponse(updateBoard));
+                .body(new BoardResponse(updateBoard, boardCustomCode));
     }
 
     @PatchMapping("/{id}/soft-delete")

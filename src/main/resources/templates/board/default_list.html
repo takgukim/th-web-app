@@ -10,13 +10,13 @@
   <div class="main-hero">
     <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
-      <h1 th:text="${boardCustomConfig.pageTitle}"></h1>
-      <p th:text="${boardCustomConfig.pageDescription}"></p>
+      <h1 th:text="${boardCustomCode.pageTitle}"></h1>
+      <p th:text="${boardCustomCode.pageDescription}"></p>
     </div>
   </div>
 
   <div class="container my-5">
-    <h2 class="section-title mb-4" th:text="${boardCustomConfig.pageSubTitle}"></h2>
+    <h2 class="section-title mb-4" th:text="${boardCustomCode.pageSubTitle}"></h2>
 
     <button class="btn btn-outline-light mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#search_form" aria-expanded="false" aria-controls="searchCollapse">
       🔍 검색 열기/닫기
@@ -132,7 +132,7 @@
       </tbody>
     </table>
 
-    <div class="text-end my-3" th:if="${boardCustomConfig.pageAccessFlag == true}">
+    <div class="text-end my-3" th:if="${boardCustomCode.pageAccessFlag == true}">
       <a th:href="@{/board/{boardType}/posts/new(boardType=${boardType})}"
          class="btn btn-warning">✏️ 글쓰기
       </a>

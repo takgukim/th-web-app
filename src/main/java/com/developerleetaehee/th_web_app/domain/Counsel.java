@@ -1,7 +1,6 @@
 package com.developerleetaehee.th_web_app.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,11 +32,8 @@ public class Counsel {
     )
     private String counselMethod;
 
-    @Column(name = "phone", length = 20)
-    private String phone;
-
-    @Column(name = "email", length = 100)
-    private String email;
+    @Column(name = "counselContent", length = 100 , nullable = false)
+    private String counselContent;
 
     @Column(name = "counsel_kind", length = 20, nullable = false)
     @JsonProperty("counsel_kind")
@@ -103,16 +99,14 @@ public class Counsel {
     public Counsel(
             String customerName,
             String counselMethod,
-            String email,
-            String phone,
+            String counselContent,
             String counselKind,
             String progressState,
             String requestMemo,
             String ipAddress) {
         this.customerName = customerName;
         this.counselMethod = counselMethod;
-        this.email = email;
-        this.phone = phone;
+        this.counselContent = counselContent;
         this.counselKind = counselKind;
         this.progressState = progressState;
         this.requestMemo = requestMemo;

@@ -10,8 +10,8 @@
   <div class="main-hero">
     <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
-      <h1 th:text="${boardCustomConfig.pageTitle}"></h1>
-      <p th:text="${boardCustomConfig.pageDescription}"></p>
+      <h1 th:text="${boardCustomCode.pageTitle}"></h1>
+      <p th:text="${boardCustomCode.pageDescription}"></p>
     </div>
   </div>
 
@@ -69,7 +69,7 @@
         <button type="button"
                 id="btnSave"
                 class="btn btn-warning me-3"
-                th:if="${boardCustomConfig.pageAccessFlag == true}">
+                th:if="${boardCustomCode.pageAccessFlag == true}">
           적용
         </button>
         <button type="button" id="btnList" class="btn btn-secondary">목록</button>

@@ -25,7 +25,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @Autowired
-    private BoardCustomConfig boardCustomConfig;
+    private BoardCustomCode boardCustomCode;
 
     @GetMapping("/{type}/posts")
     public String findAllBoards(
@@ -38,7 +38,7 @@ public class BoardController {
             @PathVariable String type,
             Model model) {
 
-        BoardInfo boardInfo = boardCustomConfig.getConfig().get(type);
+        BoardInfo boardInfo = boardCustomCode.getCode().get(type);
 
         if (boardInfo == null) {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
@@ -96,7 +96,7 @@ public class BoardController {
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("boards", boards);
         model.addAttribute("boardType", type);
-        model.addAttribute("boardCustomConfig", boardInfo);
+        model.addAttribute("boardCustomCode", boardInfo);
         model.addAttribute("pages", pages);
         model.addAttribute("searchParamMap", searchParamMap);
 
@@ -109,7 +109,7 @@ public class BoardController {
             @PathVariable Long id,
             Model model) {
 
-        BoardInfo boardInfo = boardCustomConfig.getConfig().get(type);
+        BoardInfo boardInfo = boardCustomCode.getCode().get(type);
 
         if (boardInfo == null) {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
@@ -119,7 +119,7 @@ public class BoardController {
         Board board = boardService.findAndIncreaseReadCount(id);
 
         model.addAttribute("title", boardInfo.getPageTitle());
-        model.addAttribute("boardCustomConfig", boardInfo);
+        model.addAttribute("boardCustomCode", boardInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_read", boardInfo.getPrefixFile());
@@ -128,7 +128,7 @@ public class BoardController {
     @GetMapping("/{type}/posts/new")
     public String writeForm(@PathVariable String type, Model model) {
 
-        BoardInfo boardInfo = boardCustomConfig.getConfig().get(type);
+        BoardInfo boardInfo = boardCustomCode.getCode().get(type);
 
         if (boardInfo == null) {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
@@ -137,7 +137,7 @@ public class BoardController {
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("pageSubTitle", "작성 화면");
         model.addAttribute("boardType", type);
-        model.addAttribute("boardCustomConfig", boardInfo);
+        model.addAttribute("boardCustomCode", boardInfo);
         model.addAttribute("board", Board.builder().build()); // 초기화 안하면 등록에서 못불러옴
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());
@@ -149,7 +149,7 @@ public class BoardController {
             @PathVariable long id,
             Model model) {
 
-        BoardInfo boardInfo = boardCustomConfig.getConfig().get(type);
+        BoardInfo boardInfo = boardCustomCode.getCode().get(type);
 
         if (boardInfo == null) {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
@@ -161,7 +161,7 @@ public class BoardController {
         model.addAttribute("title", boardInfo.getPageTitle());
         model.addAttribute("pageSubTitle", "수정 화면");
         model.addAttribute("boardType", type);
-        model.addAttribute("boardCustomConfig", boardInfo);
+        model.addAttribute("boardCustomCode", boardInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());

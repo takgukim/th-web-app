@@ -1,6 +1,7 @@
 package com.developerleetaehee.th_web_app.controller.test;
 
 import com.developerleetaehee.th_web_app.domain.Board;
+import com.developerleetaehee.th_web_app.dto.board.BoardCustomCode;
 import com.developerleetaehee.th_web_app.dto.board.BoardResponse;
 import com.developerleetaehee.th_web_app.dto.board.BoardSearchRequest;
 import com.developerleetaehee.th_web_app.service.test.TestService;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,9 @@ import java.util.List;
 @Tag(name = "mybatis 샘플 예제 API", description = "mybatis 샘플 CRUD 소스 참고 바랍니다.")
 public class TestApiController {
     private final TestService testService;
+
+    @Autowired
+    private final BoardCustomCode boardCustomCode;
 
     private static final Logger log = LoggerFactory.getLogger(TestApiController.class);
 
@@ -54,7 +59,7 @@ public class TestApiController {
 
         List<BoardResponse> boards =  testService.findAll(boardSearchRequest)
                 .stream()
-                .map(BoardResponse::new)
+                .map(entity -> new BoardResponse(entity, boardCustomCode))
                 .toList();
 
         return ResponseEntity.ok()
@@ -67,7 +72,7 @@ public class TestApiController {
         Board board = testService.findById(id);
 
         return ResponseEntity.ok()
-                .body(new BoardResponse(board));
+                .body(new BoardResponse(board, boardCustomCode));
     }
 
     @PostMapping
@@ -87,7 +92,7 @@ public class TestApiController {
         Board board = testService.save(request);
 
         return ResponseEntity.ok()
-                .body(new BoardResponse(board));
+                .body(new BoardResponse(board, boardCustomCode));
     }
 
     @PutMapping("/{id}")
@@ -99,7 +104,8 @@ public class TestApiController {
         Board board = testService.update(id, request);
 
         return ResponseEntity.ok()
-                .body(new BoardResponse(board));
+                .body(new BoardResponse(board, boardCustomCode
+                ));
     }
 
     @PatchMapping("/{id}/soft-delete")

@@ -18,9 +18,8 @@ public class AddCounselRequest {
     @JsonProperty("counsel_method")
     private String counselMethod;
 
-    private String phone;
-
-    private String email;
+    @JsonProperty("counsel_content")
+    private String counselContent;
 
     @JsonProperty("counsel_kind")
     private String counselKind;
@@ -40,8 +39,7 @@ public class AddCounselRequest {
         return Counsel.builder()
                 .customerName(customerName)
                 .counselMethod(counselMethod)
-                .phone(phone)
-                .email(email)
+                .counselContent(counselContent)
                 .counselKind(counselKind)
                 .progressState(progressState)
                 .requestMemo(requestMemo)

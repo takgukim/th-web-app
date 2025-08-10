@@ -10,8 +10,8 @@
   <div class="main-hero">
     <img th:src="@{/images/sample_banner_01.jpg}" alt="">
     <div class="hero-caption">
-      <h1 th:text="${boardCustomConfig.pageTitle}"></h1>
-      <p th:text="${boardCustomConfig.pageDescription}"></p>
+      <h1 th:text="${boardCustomCode.pageTitle}"></h1>
+      <p th:text="${boardCustomCode.pageDescription}"></p>
     </div>
   </div>
 
@@ -59,13 +59,13 @@
       <button type="button"
               id="btnModify"
               class="btn btn-warning me-2"
-              th:if="${boardCustomConfig.pageAccessFlag == true}">
+              th:if="${boardCustomCode.pageAccessFlag == true}">
         수정
       </button>
       <button type="button"
               id="btnDelete"
               class="btn btn-danger me-2"
-              th:if="${boardCustomConfig.pageAccessFlag == true}">
+              th:if="${boardCustomCode.pageAccessFlag == true}">
         삭제
       </button>
       <button type="button" id="btnList" class="btn btn-secondary">목록</button>
