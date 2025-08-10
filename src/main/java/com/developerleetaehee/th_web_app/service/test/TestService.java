@@ -62,7 +62,7 @@ public class TestService {
         boardMapper.softDelete(board);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         Board board = this.findById(id);
 
         boardMapper.delete(id);

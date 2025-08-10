@@ -87,7 +87,7 @@ public class CounselService {
         counsel.setDeleteDatetime(LocalDateTime.now());
     }
 
-    public void delete(long id) {
+    public void deleteById(long id) {
 
         // 진행상태가 대기인것만 삭제
         this.findByIdAndProgressState(id, "pending");

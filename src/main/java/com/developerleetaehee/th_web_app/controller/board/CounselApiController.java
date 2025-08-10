@@ -134,7 +134,7 @@ public class CounselApiController {
             responseCode = "200"
     )
     public ResponseEntity<Void> deleteCounsel(@PathVariable long id) {
-        counselService.delete(id);
+        counselService.deleteById(id);
 
         return ResponseEntity.ok()
                 .build();

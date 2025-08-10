@@ -132,7 +132,7 @@ public class BoardApiController {
     @DeleteMapping("/{id}")
     @Operation(summary = "게시글 삭제", description = "특정 게시글을 테이블에서 삭제한다.")
     public ResponseEntity<Void> deleteBoard(@PathVariable long id) {
-        boardService.delete(id);
+        boardService.deleteById(id);
 
         return ResponseEntity.ok()
                 .build();

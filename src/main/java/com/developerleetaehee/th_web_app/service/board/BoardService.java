@@ -82,7 +82,7 @@ public class BoardService {
         return board;
     }
 
-    public void delete(Long idx) {
+    public void deleteById(Long idx) {
         this.findById(idx);
 
         boardRepository.deleteById(idx);

@@ -123,7 +123,7 @@ public class TestApiController {
     @DeleteMapping("/{id}")
     @Operation(summary = "게시글 삭제", description = "특정 게시글을 테이블에서 삭제한다.")
     public ResponseEntity<Void> deleteBoard(@PathVariable long id) {
-        testService.delete(id);
+        testService.deleteById(id);
 
         return ResponseEntity.ok()
                 .build();
