@@ -1,10 +1,9 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
 import com.developerleetaehee.th_web_app.domain.Counsel;
-import com.developerleetaehee.th_web_app.dto.counsel.AddCounselRequest;
-import com.developerleetaehee.th_web_app.dto.counsel.CounselCustomCode;
-import com.developerleetaehee.th_web_app.dto.counsel.CounselResponse;
-import com.developerleetaehee.th_web_app.dto.counsel.CounselSearchRequest;
+import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
+import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
+import com.developerleetaehee.th_web_app.dto.counsel.*;
 import com.developerleetaehee.th_web_app.service.board.CounselService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -85,5 +85,60 @@ public class CounselApiController {
 
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new CounselResponse(saveCounsel, counselCustomCode));
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "고객 상담글 수정", description = "관리자가 고객의 상담글에 조언 및 답변을 합니다.")
+    @ApiResponse(
+            responseCode = "200",
+            description = "상담 수정 목록 DTO"
+    )
+    public ResponseEntity<CounselUpdateResponse> updateCounsel(
+            @PathVariable long id,
+            @RequestBody UpdateCounselRequest request
+    ) {
+        Counsel updateCounsel = counselService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(new CounselUpdateResponse(updateCounsel, counselCustomCode));
+    }
+
+    @PatchMapping("/{id}/state")
+    @Operation(summary = "고객의 상담 진행 상태를 변경", description = "관리자가 상담글 진행상태를 변경한다")
+    @ApiResponse(
+            responseCode = "200",
+            description = "상담 수정 목록 DTO"
+    )
+    public ResponseEntity<CounselUpdateResponse> updateCounselState(
+            @PathVariable long id,
+            @RequestBody UpdateCounselState request
+    ) {
+        Counsel updateCounsel = counselService.updateState(id, request);
+
+        return ResponseEntity.ok()
+                .body(new CounselUpdateResponse(updateCounsel, counselCustomCode));
+    }
+
+    @PatchMapping("/{id}/soft-delete")
+    @Operation(summary = "상담글 소프트 삭제", description = "특정 데이터를 테이블에서 지우지 않고 플래그로 처리합니다.")
+    public ResponseEntity<Map<String, String>> softDeleteCounsel(
+            @PathVariable long id,
+            @RequestBody DeleteCounselRequest request) {
+
+        counselService.softDelete(id, request);
+
+        return ResponseEntity.ok(Map.of("message", "soft delete success"));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "상담글 삭제", description = "특정 상담글을 테이블에서 삭제한다.")
+    @ApiResponse(
+            responseCode = "200"
+    )
+    public ResponseEntity<Void> deleteCounsel(@PathVariable long id) {
+        counselService.delete(id);
+
+        return ResponseEntity.ok()
+                .build();
     }
 }

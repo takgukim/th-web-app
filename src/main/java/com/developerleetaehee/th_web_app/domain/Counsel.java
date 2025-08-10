@@ -89,7 +89,6 @@ public class Counsel {
     private LocalDateTime deleteDatetime;
 
     public void update(Counsel counsel) {
-        this.requestMemo = counsel.requestMemo;
         this.companyMemo = counsel.getCompanyMemo();
         this.updateUser = counsel.getUpdateUser();
         this.updateDatetime = LocalDateTime.now();

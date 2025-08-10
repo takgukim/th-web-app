@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-@Schema(description = "고객 상담 신청 응답 DTO")
-public class CounselResponse {
+@Schema(description = "관리자 상담 데이터 응답 DTO")
+public class CounselUpdateResponse {
     private final long idx;
     private final String customerName;
     private final String counselMethod;
@@ -17,9 +17,10 @@ public class CounselResponse {
     private final String counselKind;
     private final String progressState;
     private final String requestMemo;
+    private final String companyMemo;
     private final String applyDate;
 
-    public CounselResponse(Counsel counsel, CounselCustomCode codeMap) {
+    public CounselUpdateResponse(Counsel counsel, CounselCustomCode codeMap) {
 
         LocalDate fmtDate = LocalDate.parse(counsel.getApplyDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
@@ -30,7 +31,7 @@ public class CounselResponse {
         this.counselKind = codeMap.getCounselKindName(counsel.getCounselKind());
         this.progressState = codeMap.getCounselStateName(counsel.getProgressState());
         this.requestMemo = counsel.getRequestMemo();
+        this.companyMemo = counsel.getCompanyMemo();
         this.applyDate = fmtDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
-
 }
