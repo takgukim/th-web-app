@@ -1,8 +1,6 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
 import com.developerleetaehee.th_web_app.domain.Counsel;
-import com.developerleetaehee.th_web_app.dto.board.DeleteBoardRequest;
-import com.developerleetaehee.th_web_app.dto.board.UpdateBoardRequest;
 import com.developerleetaehee.th_web_app.dto.counsel.*;
 import com.developerleetaehee.th_web_app.service.board.CounselService;
 import com.developerleetaehee.th_web_app.utility.IpUtil;
