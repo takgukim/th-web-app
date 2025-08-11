@@ -56,7 +56,7 @@ public class CounselApiController {
     @Operation(summary = "특정 상담내용 조회", description = "고유정보로 고객 상담글을 조회합니다.")
     @ApiResponse(
             responseCode = "200",
-            description = "상담 목록 DTO 객체"
+            description = "상담 목록 DTO"
     )
     public ResponseEntity<CounselResponse> findCounsel(@PathVariable long id) {
         Counsel counsel = counselService.findById(id);
@@ -89,7 +89,7 @@ public class CounselApiController {
     @Operation(summary = "고객 상담글 수정", description = "관리자가 고객의 상담글에 조언 및 답변을 합니다.")
     @ApiResponse(
             responseCode = "200",
-            description = "상담 수정 목록 DTO"
+            description = "상담 목록 DTO"
     )
     public ResponseEntity<CounselResponse> updateCounsel(
             @PathVariable long id,
@@ -105,7 +105,7 @@ public class CounselApiController {
     @Operation(summary = "고객의 상담 진행 상태를 변경", description = "관리자가 상담글 진행상태를 변경한다")
     @ApiResponse(
             responseCode = "200",
-            description = "상담 수정 목록 DTO"
+            description = "상담 목록 DTO"
     )
     public ResponseEntity<CounselResponse> updateCounselState(
             @PathVariable long id,
