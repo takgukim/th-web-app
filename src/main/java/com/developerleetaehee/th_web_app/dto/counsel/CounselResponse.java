@@ -17,6 +17,7 @@ public class CounselResponse {
     private final String counselKind;
     private final String progressState;
     private final String requestMemo;
+    private final String companyMemo;
     private final String applyDate;
 
     public CounselResponse(Counsel counsel, CounselCustomCode codeMap) {
@@ -30,6 +31,7 @@ public class CounselResponse {
         this.counselKind = codeMap.getCounselKindName(counsel.getCounselKind());
         this.progressState = codeMap.getCounselStateName(counsel.getProgressState());
         this.requestMemo = counsel.getRequestMemo();
+        this.companyMemo = counsel.getCompanyMemo();
         this.applyDate = fmtDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 

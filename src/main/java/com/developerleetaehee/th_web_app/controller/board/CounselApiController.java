@@ -91,14 +91,14 @@ public class CounselApiController {
             responseCode = "200",
             description = "상담 수정 목록 DTO"
     )
-    public ResponseEntity<CounselUpdateResponse> updateCounsel(
+    public ResponseEntity<CounselResponse> updateCounsel(
             @PathVariable long id,
             @RequestBody UpdateCounselRequest request
     ) {
         Counsel updateCounsel = counselService.update(id, request);
 
         return ResponseEntity.ok()
-                .body(new CounselUpdateResponse(updateCounsel, counselCustomCode));
+                .body(new CounselResponse(updateCounsel, counselCustomCode));
     }
 
     @PatchMapping("/{id}/state")
@@ -107,14 +107,14 @@ public class CounselApiController {
             responseCode = "200",
             description = "상담 수정 목록 DTO"
     )
-    public ResponseEntity<CounselUpdateResponse> updateCounselState(
+    public ResponseEntity<CounselResponse> updateCounselState(
             @PathVariable long id,
             @RequestBody UpdateCounselState request
     ) {
         Counsel updateCounsel = counselService.updateState(id, request);
 
         return ResponseEntity.ok()
-                .body(new CounselUpdateResponse(updateCounsel, counselCustomCode));
+                .body(new CounselResponse(updateCounsel, counselCustomCode));
     }
 
     @PatchMapping("/{id}/soft-delete")
