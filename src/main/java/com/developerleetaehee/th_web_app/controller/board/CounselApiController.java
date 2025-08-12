@@ -33,7 +33,7 @@ public class CounselApiController {
     private final CounselCustomCode counselCustomCode;
 
     @GetMapping
-    @Operation(summary = "상담 전체 조회", description = "조건과 페이징으로 조회합니다. 기본값은 상담진행상태 대기")
+    @Operation(summary = "상담 전체 조회", description = "조건과 페이징으로 조회합니다.")
     @ApiResponse(
             responseCode = "200",
             description = "상담 목록 DTO 객체"
@@ -44,7 +44,7 @@ public class CounselApiController {
             @RequestParam(name = "customer_name", defaultValue = "") String customerName,
             @RequestParam(name = "counsel_method", defaultValue = "") String counselMethod,
             @RequestParam(name = "counsel_kind", defaultValue = "") String counselKind,
-            @RequestParam(name = "progress_state", defaultValue = "pending") String progressStat,
+            @RequestParam(name = "progress_state", defaultValue = "") String progressStat,
             @RequestParam(name = "start_date", defaultValue = "") String startDate,
             @RequestParam(name = "end_date", defaultValue = "") String endDate
     ) {

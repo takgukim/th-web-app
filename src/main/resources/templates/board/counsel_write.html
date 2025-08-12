@@ -42,15 +42,16 @@
           <a href="#" class="btn btn-warning btn-sm" role="button">📋 전체 상담현황 조회</a>
         </div>
 
-        <form class="bg-dark p-4 rounded mx-auto">
+        <form id="counsel_submit" method="POST" class="bg-dark p-4 rounded mx-auto">
           <!-- 이름 -->
           <div class="mb-3">
-            <label for="name" class="form-label">이름</label>
+            <label for="customer_name" class="form-label">이름</label>
             <input type="text"
                    id="customer_name"
                    name="customer_name"
                    class="form-control"
                    placeholder="이름을 입력하세요"
+                   autocomplete="off"
             />
           </div>
 
@@ -64,7 +65,9 @@
                          th:id="'contract-' + ${entry.key}"
                          name="contract_method"
                          class="form-check-input"
-                         th:value="${entry.key}" />
+                         th:checked="${entry.key == 'call'}"
+                         th:value="${entry.key}"
+                  />
                   <label class="form-check-label"
                          th:for="'contract-' + ${entry.key}" th:text="${entry.value}">
                   </label>
@@ -74,15 +77,28 @@
           </div>
 
           <!-- 휴대폰 번호 -->
-          <div class="mb-3">
-            <label for="phone" class="form-label">휴대폰 번호</label>
-            <input type="text" id="phone" name="phone" class="form-control" placeholder="📱 예: 01012345678" pattern="\d*" />
+          <div class="mb-3 div-call-section" style="display: none;">
+            <label for="call" class="form-label">휴대폰 번호</label>
+            <input type="text"
+                   id="call"
+                   name="call"
+                   class="form-control"
+                   autocomplete="off"
+                   placeholder="📱 예: 01012345678"
+                   pattern="\d*"
+            />
           </div>
 
           <!-- 이메일 -->
-          <div class="mb-3">
+          <div class="mb-3 div-email-section" style="display: none;">
             <label for="email" class="form-label">이메일</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="📧 예: example@mail.com" />
+            <input type="email"
+                   id="email"
+                   name="email"
+                   class="form-control"
+                   autocomplete="off"
+                   placeholder="📧 예: example@mail.com"
+            />
           </div>
 
           <!-- 상담종류 -->
@@ -98,17 +114,29 @@
 
           <!-- 요청사항 -->
           <div class="mb-3">
-            <label for="request" class="form-label">요청사항</label>
+            <label for="request_memo" class="form-label">요청사항</label>
             <textarea class="form-control" id="request_memo" name="request_memo" rows="4" placeholder="요청사항을 입력하세요"></textarea>
           </div>
 
           <!-- 버튼 -->
           <div class="text-center">
-            <button type="submit" class="btn btn-primary me-2">신청</button>
-            <button type="reset" class="btn btn-secondary">초기화</button>
+            <button type="button"
+                    id="btnSave"
+                    class="btn btn-primary me-2">
+              신청
+            </button>
+            <button type="button"
+                    id="btnReset"
+                    class="btn btn-secondary">
+              초기화
+            </button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<th:block layout:fragment="custom_js">
+  <script th:src="@{/js/board/counsel.js}"></script>
+</th:block>
