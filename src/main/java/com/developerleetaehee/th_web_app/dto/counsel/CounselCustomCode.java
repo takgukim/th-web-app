@@ -1,10 +1,12 @@
 package com.developerleetaehee.th_web_app.dto.counsel;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Component
+@Getter
 public class CounselCustomCode {
     private final Map<String, String> counselMethodMap = Map.of(
             "call", "전화",

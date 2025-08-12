@@ -6,6 +6,7 @@ import com.developerleetaehee.th_web_app.repository.CounselRepository;
 import com.developerleetaehee.th_web_app.specification.CounselSpecification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,9 @@ import java.time.LocalDateTime;
 public class CounselService {
 
     private final CounselRepository counselRepository;
+
+    @Autowired
+    private CounselCustomCode counselCustomCode;
 
     public Page<Counsel> getCounselPage(CounselSearchRequest counselSearchRequest) {
         Pageable pageable = PageRequest.of(
@@ -93,5 +97,23 @@ public class CounselService {
         this.findByIdAndProgressState(id, "pending");
 
         counselRepository.deleteById(id);
+    }
+
+    public String checkCounselCode(String code, String value) {
+        String result = null;
+
+        switch (code) {
+            case "counsel_method" :
+                result = counselCustomCode.getCounselMethodMap().get(value);
+                break;
+            case "counsel_kind" :
+                result = counselCustomCode.getCounselKindMap().get(value);
+                break;
+            case "progress_state" :
+                result = counselCustomCode.getCounselStateMap().get(value);
+                break;
+        }
+
+        return result;
     }
 }

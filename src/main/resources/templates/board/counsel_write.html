@@ -46,21 +46,30 @@
           <!-- 이름 -->
           <div class="mb-3">
             <label for="name" class="form-label">이름</label>
-            <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요" />
+            <input type="text"
+                   id="customer_name"
+                   name="customer_name"
+                   class="form-control"
+                   placeholder="이름을 입력하세요"
+            />
           </div>
 
           <!-- 연락방법 -->
           <div class="mb-3">
             <label class="form-label">연락방법</label>
             <div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="contactMethod" id="contactPhone" value="phone" />
-                <label class="form-check-label" for="contactPhone">전화</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="contactMethod" id="contactEmail" value="email" />
-                <label class="form-check-label" for="contactEmail">이메일</label>
-              </div>
+              <th:bloack th:each="entry : ${counselMethodMap}">
+                <div class="form-check form-check-inline">
+                  <input type="radio"
+                         th:id="'contract-' + ${entry.key}"
+                         name="contract_method"
+                         class="form-check-input"
+                         th:value="${entry.key}" />
+                  <label class="form-check-label"
+                         th:for="'contract-' + ${entry.key}" th:text="${entry.value}">
+                  </label>
+                </div>
+              </th:bloack>
             </div>
           </div>
 
@@ -78,22 +87,19 @@
 
           <!-- 상담종류 -->
           <div class="mb-3">
-            <label for="category" class="form-label">상담종류</label>
-            <select class="form-select" id="category">
+            <label for="select-counsel-kind" class="form-label">상담종류</label>
+            <select id="select-counsel-kind" name="select_counsel_kind" class="form-select">
               <option value="">선택하세요</option>
-              <option value="type1">칭찬</option>
-              <option value="type2">불만</option>
-              <option value="type3">환불</option>
-              <option value="type4">교환</option>
-              <option value="type5">건의</option>
-              <option value="type6">입점</option>
+              <th:block th:each="entry : ${counselKindMap}">
+                <option th:value="${entry.key}" th:text="${entry.value}"></option>
+              </th:block>
             </select>
           </div>
 
           <!-- 요청사항 -->
           <div class="mb-3">
             <label for="request" class="form-label">요청사항</label>
-            <textarea class="form-control" id="request" rows="4" placeholder="요청사항을 입력하세요"></textarea>
+            <textarea class="form-control" id="request_memo" name="request_memo" rows="4" placeholder="요청사항을 입력하세요"></textarea>
           </div>
 
           <!-- 버튼 -->

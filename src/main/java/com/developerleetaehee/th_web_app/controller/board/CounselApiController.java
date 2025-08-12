@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +33,36 @@ public class CounselApiController {
     private final CounselCustomCode counselCustomCode;
 
     @GetMapping
-    @Operation(summary = "상담 전체 조회", description = "조건과 페이징으로 조회합니다.")
+    @Operation(summary = "상담 전체 조회", description = "조건과 페이징으로 조회합니다. 기본값은 상담진행상태 대기")
     @ApiResponse(
             responseCode = "200",
             description = "상담 목록 DTO 객체"
     )
     public ResponseEntity<List<CounselResponse>> findAllCounsels(
             @RequestParam(name = "start_page", defaultValue = "0") int startPage,
-            @RequestParam(name = "per_page", defaultValue = "10") int perPage
+            @RequestParam(name = "per_page", defaultValue = "10") int perPage,
+            @RequestParam(name = "customer_name", defaultValue = "") String customerName,
+            @RequestParam(name = "counsel_method", defaultValue = "") String counselMethod,
+            @RequestParam(name = "counsel_kind", defaultValue = "") String counselKind,
+            @RequestParam(name = "progress_state", defaultValue = "pending") String progressStat,
+            @RequestParam(name = "start_date", defaultValue = "") String startDate,
+            @RequestParam(name = "end_date", defaultValue = "") String endDate
     ) {
+        if (startDate == null || startDate.isBlank()) {
+            startDate = LocalDate.now().minusMonths(1).toString();
+        }
+        if (endDate == null || endDate.isBlank()) {
+            endDate = LocalDate.now().toString();
+        }
+
         CounselSearchRequest counselSearchRequest = new CounselSearchRequest();
         counselSearchRequest.setPageRange(startPage, perPage);
+        counselSearchRequest.setCustomerName(customerName);
+        counselSearchRequest.setCounselMethod(counselMethod);
+        counselSearchRequest.setCounselKind(counselKind);
+        counselSearchRequest.setProgressState(progressStat);
+        counselSearchRequest.setSearchStartDate(startDate);
+        counselSearchRequest.setSearchEndDate(endDate);
 
         List<CounselResponse> boards = counselService.findAll(counselSearchRequest)
                 .stream()
@@ -76,13 +97,25 @@ public class CounselApiController {
             @RequestBody AddCounselRequest request,
             HttpServletRequest httpRequest
     ) {
-            request.setIpAddress(IpUtil.getRealIp(httpRequest));
-            request.setProgressState("pending");
+        String counselMethod = request.getCounselMethod();
+        String counselKind = request.getCounselKind();
 
-            Counsel saveCounsel = counselService.save(request);
+        String chkCounselMethod = this.getCodeValidate("counsel_method", counselMethod);
+        if (chkCounselMethod == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "상담 방법이 유효하지 않습니다.");
+        }
 
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new CounselResponse(saveCounsel, counselCustomCode));
+        String chkCounselKind = this.getCodeValidate("counsel_kind", counselKind);
+        if (chkCounselKind == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "상담 종류가 유효하지 않습니다.");
+        }
+
+        request.setIpAddress(IpUtil.getRealIp(httpRequest));
+        request.setProgressState("pending");
+        Counsel saveCounsel = counselService.save(request);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CounselResponse(saveCounsel, counselCustomCode));
     }
 
     @PutMapping("/{id}")
@@ -111,6 +144,14 @@ public class CounselApiController {
             @PathVariable long id,
             @RequestBody UpdateCounselState request
     ) {
+        String progressState = request.getProgressState();
+        System.out.println("progress_state = " + progressState);
+
+        String chkProgressState = this.getCodeValidate("progress_state", progressState);
+        if (chkProgressState == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "상담 진행 상태가 유효하지 않습니다.");
+        }
+
         Counsel updateCounsel = counselService.updateState(id, request);
 
         return ResponseEntity.ok()
@@ -138,5 +179,27 @@ public class CounselApiController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    /**
+     * 상담 코드 검증 (유효성 클래스로 교체 검토 필요)
+     *
+     * @param String code
+     * @param String value
+     *
+     * @return String
+     */
+    private String getCodeValidate(String code, String value) {
+        String result = null;
+
+        switch (code) {
+            case "counsel_method" :
+            case "counsel_kind" :
+            case "progress_state" :
+                result = counselService.checkCounselCode(code, value);
+                break;
+        }
+
+        return result;
     }
 }
