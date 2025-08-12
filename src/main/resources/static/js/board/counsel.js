@@ -4,9 +4,6 @@
 $(function() {
     console.log("counsel.js");
 
-    const contractMethodInit = $("input[name='contract_method']:checked").val();
-    $(`.div-${contractMethodInit}-section`).show();
-
     $("input[name='contract_method']").on("click", function() {
         $(".div-call-section, .div-email-section").hide();
         $(`.div-${$(this).val()}-section`).show();
@@ -17,8 +14,16 @@ $(function() {
     });
 
     $("#btnReset").on("click", function() {
-        alert("reset");
+        if (confirm("입력하신 내용을 모두 초기화하겠습니까?") === true) {
+            $("#counsel_submit #customer_name").val("");
+            $("#counsel_submit input[name='contract_method']").prop("checked", false);
+            $("#contract-call").trigger("click");
+            $("#counsel_submit #select-counsel-kind").val("");
+            $("#counsel_submit #request_memo").val("");
+        }
     });
+
+    $("#contract-call").trigger("click");
 });
 
 /*
@@ -27,7 +32,7 @@ $(function() {
 function counselInsert()
 {
     const customerName = $("#counsel_submit #customer_name").val();
-    const contractMethod = $("#counsel_submit input[name='contract_method']:checked").val()
+    const contractMethod = $("#counsel_submit input[name='contract_method']:checked").val();
     const counselKind = $("#counsel_submit #select-counsel-kind").val();
     const requestMemo = $("#counsel_submit #request_memo").val();
 
@@ -43,7 +48,7 @@ function counselInsert()
 
     const counselContent = $(`#${contractMethod}`).val();
     if (counselContent === "") {
-        alert("선택하신 연락방법에 따른 정보를 입력해주세요.");
+        alert("선택하신 연락 방법에 따른 정보를 입력해주세요.");
         return;
     }
 
@@ -81,5 +86,7 @@ function counselInsert()
  */
 function callbackInsert(data, params)
 {
-  $(location).attr("href", `/counsel/write`);
+    alert(`상담이 등록되었습니다.\n1-2일이내에 직원이 안내 예정입니다.`);
+
+    $(location).attr("href", `/counsel/write`);
 }

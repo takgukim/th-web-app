@@ -23,4 +23,12 @@ public class CounselController {
 
         return "board/counsel_write";
     }
+
+    @GetMapping
+    public String findAllBoards(Model model) {
+
+        model.addAttribute("title", "상담 진행 현황");
+
+        return "board/counsel_list";
+    }
 }
