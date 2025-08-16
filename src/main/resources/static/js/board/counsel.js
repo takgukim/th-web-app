@@ -1,5 +1,5 @@
 /*
- * 게시판
+ * 상담
  */
 $(function() {
     console.log("counsel.js");
