@@ -109,9 +109,9 @@
         <tr>
           <th>No</th>
           <th>제목</th>
-          <th>작성자</th>
-          <th>등록시각</th>
-          <th>조회수</th>
+          <th class="hide-mobile">작성자</th>
+          <th class="hide-mobile">등록시각</th>
+          <th class="hide-mobile">조회수</th>
         </tr>
       </thead>
       <tbody>
@@ -119,11 +119,14 @@
             th:data-id="${board.idx}"
             th:data-board_type="${boardType}"
             class="tr-click-row">
-          <td th:text="${pages.pagingStartNo - stat.index}"></td>
+          <td class="text-center"
+              th:text="${pages.pagingStartNo - stat.index}"></td>
           <td th:text="${board.subject}"></td>
-          <td th:text="${board.writer}"></td>
-          <td th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-          <td th:text="${board.readCount}"></td>
+          <td class="text-center hide-mobile"
+              th:text="${board.writer}"></td>
+          <td class="text-center hide-mobile"
+              th:text="${#temporals.format(board.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+          <td class="text-center hide-mobile" th:text="${board.readCount}"></td>
         </tr>
 
         <tr class="no-data-row" th:if="${boards.size() == 0}">

@@ -4,6 +4,18 @@
 $(function() {
     console.log("counsel.js");
 
+    $("#btnSearch").on("click", function() {
+        $("#search_form").submit();
+    });
+
+    $("#btnSearchReset").on("click", function() {
+        startPicker.setDate(FLATPICKR_ONE_MONTH, true);
+        endPicker.setDate(FLATPICKR_COMMON_TODAY, true);
+        $("#search_subject").val("");
+        $("#search_writer").val("");
+        $("#search_customer_name").val("");
+    });
+
     $("input[name='contract_method']").on("click", function() {
         $(".div-call-section, .div-email-section").hide();
         $(`.div-${$(this).val()}-section`).show();

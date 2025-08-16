@@ -6,7 +6,8 @@
 }
 
 @media (max-width:768px){
-  /* 작성자, 등록시각, 조회수 숨김 */
+  /* 작성자, 등록시각, 조회수 숨김 (더이상안함) */
+  /*
   .table th:nth-child(3),
   .table th:nth-child(4),
   .table th:nth-child(5),
@@ -14,6 +15,12 @@
   .table td:nth-child(4),
   .table td:nth-child(5) {
     display: none;
+  }
+  */
+  
+  /* 모바일에서 숨길 컬럼 클래스 */
+  .hide-mobile {
+    display: none !important;
   }
 }
 
@@ -100,6 +107,16 @@
  thead.thead_list th {
    background-color: #0d6efd !important;
    color: white !important;
+   text-align: center !important;
+ }
+
+ /* 테이블 셀 정렬 클래스 */
+ .text-center {
+   text-align: center !important;
+ }
+ 
+ .text-left {
+   text-align: left !important;
  }
 
  .tr-click-row:hover > td {

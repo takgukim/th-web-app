@@ -3,15 +3,166 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
-    <div class="main-hero">
-      <img th:src="@{/images/sample_banner_01.jpg}" alt="">
-      <div class="hero-caption">
-        <h1>상담 진행 현황</h1>
-        <p>등록된 상담 진행 내역을 확인할 수 있습니다.</p>
-      </div>
-    </div>
+  <th:block layout:fragment="custom_css">
+    <link rel="stylesheet" th:href="@{/css/board/board.css}" />
+  </th:block>
 
-    <div class="container my-5">
-      <h2 class="section-title mb-4">상담 진행 현황</h2>
+  <div class="main-hero">
+    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
+    <div class="hero-caption">
+      <h1>상담 진행 현황</h1>
+      <p>고객님의 상담 신청 현황을 확인하세요.</p>
     </div>
+  </div>
+
+  <div class="container my-5">
+    <h2 class="section-title mb-4">상담 내역</h2>
+
+    <button class="btn btn-outline-light mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#search_form" aria-expanded="false" aria-controls="searchCollapse">
+      🔍 검색 열기/닫기
+    </button>
+
+    <!-- 검색 영역 -->
+    <form id="search_form"
+          method="GET"
+          class="collapse"
+          action="/counsel">
+      <div class="search-section bg-dark p-3 rounded mb-4">
+
+        <!-- 날짜 시작 -->
+        <div class="mb-3 position-relative">
+          <label for="search_start_date" class="form-label text-white fw-semibold">시작 날짜</label>
+          <div class="input-group" id="flatPickerStartDate" data-wrap="true">
+            <input type="text"
+                   id="search_start_date"
+                   name="search_start_date"
+                   class="form-control"
+                   placeholder="YYYY-MM-DD"
+                   th:value="${searchParamMap.search_start_date}"
+                   data-input />
+            <span class="input-group-text bg-secondary text-white" data-open>
+                <i class="bi bi-calendar3"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- 날짜 종료 -->
+        <div class="mb-3 position-relative">
+          <label for="search_end_date" class="form-label text-white fw-semibold">종료 날짜</label>
+          <div class="input-group" id="flatPickerEndDate" data-wrap="true">
+            <input type="text"
+                   id="search_end_date"
+                   name="search_end_date"
+                   class="form-control"
+                   placeholder="YYYY-MM-DD"
+                   th:value="${searchParamMap.search_end_date}"
+                   data-input />
+            <span class="input-group-text bg-secondary text-white" data-open>
+                <i class="bi bi-calendar3"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- 고객명 -->
+        <div class="mb-3">
+          <label for="search_customer_name" class="form-label text-white fw-semibold">고객명</label>
+          <input type="text"
+                 id="search_customer_name"
+                 name="search_customer_name"
+                 class="form-control"
+                 placeholder="고객명을 입력하세요"
+                 autocomplete="off"
+                 th:value="${searchParamMap.search_customer_name}"
+          />
+        </div>
+
+        <!-- 검색 + 초기화 버튼 그룹 -->
+        <div class="d-flex flex-column flex-md-row gap-2">
+          <button type="button" id="btnSearch" class="btn btn-warning flex-grow-1">검색</button>
+          <button type="button" id="btnSearchReset" class="btn btn-secondary flex-grow-1">초기화</button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-dark">
+      <colgroup>
+        <col style="width: 8%" />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+      </colgroup>
+      <thead class="thead_list">
+        <tr>
+          <th>No</th>
+          <th>상담요청자</th>
+          <th class="hide-mobile">상담종류</th>
+          <th class="hide-mobile">상담방법</th>
+          <th>진행상태</th>
+          <th class="hide-mobile">등록시각</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tr-click-row"
+            th:each="counsel, stat: ${counsels}">
+          <td th:text="${pages.pagingStartNo - stat.index}"></td>
+          <td th:text="${counsel.customerName}" class="text-center"></td>
+          <td class="hide-mobile text-center"
+              th:text="${counsel.counselKind == '칭찬' ? '🏷️ ' + counsel.counselKind :
+              counsel.counselKind == '불만' ? '😠 ' + counsel.counselKind :
+              counsel.counselKind == '환불' ? '💰 ' + counsel.counselKind :
+              counsel.counselKind == '교환' ? '🔄 ' + counsel.counselKind :
+              counsel.counselKind == '건의' ? '💡 ' + counsel.counselKind :
+              counsel.counselKind == '입점' ? '🏪 ' + counsel.counselKind : ''}">
+          </td>
+          <td class="hide-mobile text-center"
+              th:text="${counsel.counselMethod == '전화' ? '📞 ' + counsel.counselMethod :
+              counsel.counselMethod == '이메일' ? '📧 ' + counsel.counselMethod : ''}">
+          </td>
+          <td class="text-center"
+              th:text="${counsel.progressState == '대기' ? '💤 ' + counsel.progressState :
+              counsel.progressState == '진행중' ? '⏳ ' + counsel.progressState :
+              counsel.progressState == '완료' ? '✅ ' + counsel.progressState :
+              counsel.progressState == '보류' ? '⏸️ ' + counsel.progressState : ''}">
+          </td>
+          <td class="hide-mobile text-center"
+              th:text="${#temporals.format(counsel.registerDatetime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+
+        <tr class="no-data-row" th:if="${counsels.size() == 0}">
+          <td>등록된 내용이 없습니다.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav th:replace="fragments/pagination :: pagination(
+            pages=${pages},
+            searchParamMap=${searchParamMap},
+            queryString=${queryString})">
+    </nav>
+  </div>
 </div>
+
+<th:block layout:fragment="custom_js">
+  <script th:src="@{/js/board/counsel.js}"></script>
+  <script>
+    const startPicker = flatpickr("#flatPickerStartDate", {
+        dateFormat: "Y-m-d",
+        locale: "ko",
+        maxDate: "today",
+        defaultDate: $("#search_start_date").val() || FLATPICKR_ONE_MONTH,
+        wrap: true,
+        disableMobile: true
+    });
+
+    const endPicker = flatpickr("#flatPickerEndDate", {
+        dateFormat: "Y-m-d",
+        locale: "ko",
+        maxDate: "today",
+        defaultDate: $("#search_end_date").val() || FLATPICKR_COMMON_TODAY,
+        wrap: true,
+        disableMobile: true
+    });
+  </script>
+</th:block>
