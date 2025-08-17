@@ -13,6 +13,20 @@
 
  $(function() {
     console.log("common.js");
+
+    $("#btn-sign-up").on("click", function() {
+      if (confirm("회원가입을 진행하시겠습니까?") === true) {
+        $(location).attr('href', "/user/sign_up");
+      }
+    });
+
+    $("#btn-login").on("click", function() {
+      alert("로그인 준비중");
+    });
+
+    $(".btn-logout-form").on("click", function() {
+      alert("로그아웃 준비중");
+    });
  });
 
  function getOneMonthAgoSameDay(date)
