@@ -14,7 +14,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false  # 권장 옵션 (지연로딩 이슈 방지)
   jackson:
-    property-naming-strategy: SNAKE_CASE
+    property-naming-strategy: SNAKE_CASE # 이거 설정해야 응답 시 스네이크 방식으로 출력 (예시 - customer_name)
     time-zone: Asia/Seoul # 타임존 관련 이슈 방지
 logging:
   level:
