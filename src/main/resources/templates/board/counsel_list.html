@@ -136,6 +136,12 @@
       </tbody>
     </table>
 
+    <div class="text-end my-3">
+      <a th:href="@{/counsel/write}"
+         class="btn btn-warning">✏️ 상담신청
+      </a>
+    </div>
+
     <nav th:replace="fragments/pagination :: pagination(
             pages=${pages},
             searchParamMap=${searchParamMap},
