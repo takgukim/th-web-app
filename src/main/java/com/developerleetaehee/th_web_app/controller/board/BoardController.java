@@ -1,5 +1,7 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
+import com.developerleetaehee.th_web_app.common.MenuCustomCode;
+import com.developerleetaehee.th_web_app.common.MenuInfo;
 import com.developerleetaehee.th_web_app.domain.Board;
 import com.developerleetaehee.th_web_app.dto.board.*;
 import com.developerleetaehee.th_web_app.service.board.BoardService;
@@ -22,6 +24,8 @@ import java.util.Map;
 @RequestMapping("/board")
 public class BoardController {
 
+    private final MenuCustomCode menuCustomCode;
+
     private final BoardService boardService;
 
     @Autowired
@@ -43,6 +47,8 @@ public class BoardController {
         if (boardInfo == null) {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
+
+        MenuInfo menuInfo = menuCustomCode.getCode().get(type);
 
         if (searchStartDate == null || searchStartDate.isBlank()) {
             searchStartDate = LocalDate.now().minusMonths(1).toString();
@@ -93,10 +99,11 @@ public class BoardController {
         String queryString = PaginationUtil.buildQueryStringFromMap(searchParamMap);
         Map<String,Object> pages = PaginationUtil.buildPage(boardPage, startPage, perPage, pageUrl, queryString);
 
-        model.addAttribute("title", boardInfo.getPageTitle());
+        model.addAttribute("title", menuInfo.getTitle());
         model.addAttribute("boards", boards);
         model.addAttribute("boardType", type);
         model.addAttribute("boardCustomCode", boardInfo);
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("pages", pages);
         model.addAttribute("searchParamMap", searchParamMap);
 
@@ -115,11 +122,14 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
+        MenuInfo menuInfo = menuCustomCode.getCode().get(type);
+
         // 조회수 업데이트 하면서 상세 내용 조회
         Board board = boardService.findAndIncreaseReadCount(id);
 
-        model.addAttribute("title", boardInfo.getPageTitle());
+        model.addAttribute("title", menuInfo.getTitle());
         model.addAttribute("boardCustomCode", boardInfo);
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_read", boardInfo.getPrefixFile());
@@ -134,10 +144,13 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
-        model.addAttribute("title", boardInfo.getPageTitle());
+        MenuInfo menuInfo = menuCustomCode.getCode().get(type);
+
+        model.addAttribute("title", menuInfo.getTitle());
         model.addAttribute("pageSubTitle", "작성 화면");
         model.addAttribute("boardType", type);
         model.addAttribute("boardCustomCode", boardInfo);
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("board", Board.builder().build()); // 초기화 안하면 등록에서 못불러옴
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());
@@ -155,13 +168,16 @@ public class BoardController {
             throw new IllegalArgumentException("존재하지 않는 게시판 타입입니다: " + type);
         }
 
+        MenuInfo menuInfo = menuCustomCode.getCode().get(type);
+
         // 조회수 업데이트 하면서 상세 내용 조회
         Board board = boardService.findAndIncreaseReadCount(id);
 
-        model.addAttribute("title", boardInfo.getPageTitle());
+        model.addAttribute("title", menuInfo.getTitle());
         model.addAttribute("pageSubTitle", "수정 화면");
         model.addAttribute("boardType", type);
         model.addAttribute("boardCustomCode", boardInfo);
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("board", new BoardViewResponse(board));
 
         return String.format("board/%s_write", boardInfo.getPrefixFile());

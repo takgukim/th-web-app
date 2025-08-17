@@ -7,13 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/board/board.css}" />
   </th:block>
 
-  <div class="main-hero">
-    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
-    <div class="hero-caption">
-      <h1 th:text="${boardCustomCode.pageTitle}"></h1>
-      <p th:text="${boardCustomCode.pageDescription}"></p>
-    </div>
-  </div>
+  <div th:replace="fragments/menu/header :: menu_header"></div>
 
   <div class="container my-5">
     <h2 class="section-title mb-4" th:text="${boardCustomCode.pageSubTitle}"></h2>

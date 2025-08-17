@@ -3,13 +3,7 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
-  <div class="main-hero">
-    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
-    <div class="hero-caption">
-      <h1>상품목록</h1>
-      <p>티에이치 쇼핑몰 제품 소개해드려요.</p>
-    </div>
-  </div>
+  <div th:replace="fragments/menu/header :: menu_header"></div>
 
   <div class="container my-5">
     <div class="section-title">상품몰</div>

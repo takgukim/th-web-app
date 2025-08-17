@@ -1,5 +1,7 @@
 package com.developerleetaehee.th_web_app.controller.board;
 
+import com.developerleetaehee.th_web_app.common.MenuCustomCode;
+import com.developerleetaehee.th_web_app.common.MenuInfo;
 import com.developerleetaehee.th_web_app.domain.Counsel;
 import com.developerleetaehee.th_web_app.dto.counsel.CounselCustomCode;
 import com.developerleetaehee.th_web_app.dto.counsel.CounselListViewResponse;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +30,8 @@ import java.util.Map;
 @RequestMapping("/counsel")
 public class CounselController {
 
+    private final MenuCustomCode menuCustomCode;
+
     private final CounselService counselService;
 
     @Autowired
@@ -35,7 +40,14 @@ public class CounselController {
     @GetMapping("/write")
     public String writeForm(Model model) {
 
-        model.addAttribute("title", "상담신청");
+        MenuInfo menuInfo = menuCustomCode.getCode().get("counsel_write");
+
+        if (menuInfo == null) {
+            throw new IllegalArgumentException("존재하지 않는 게시판 유형입니다. 관리자에게 문의하세요.");
+        }
+
+        model.addAttribute("title", menuInfo.getTitle());
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("counselMethodMap", counselCustomCode.getCounselMethodMap());
         model.addAttribute("counselKindMap", counselCustomCode.getCounselKindMap());
 
@@ -50,6 +62,12 @@ public class CounselController {
         @RequestParam(name = "search_end_date", defaultValue = "") String searchEndDate,
         @RequestParam(name = "search_customer_name", defaultValue = "") String searchCustomerName,
         Model model) {
+
+        MenuInfo menuInfo = menuCustomCode.getCode().get("counsel_list");
+
+        if (menuInfo == null) {
+            throw new IllegalArgumentException("존재하지 않는 게시판 유형입니다. 관리자에게 문의하세요.");
+        }
 
         if (searchStartDate == null || searchStartDate.isBlank()) {
             searchStartDate = LocalDate.now().minusMonths(1).toString();
@@ -92,7 +110,8 @@ public class CounselController {
         String queryString = PaginationUtil.buildQueryStringFromMap(searchParamMap);
         Map<String, Object> pages = PaginationUtil.buildPage(counselPage, startPage, perPage, pageUrl, queryString);
 
-        model.addAttribute("title", "상담 진행 현황");
+        model.addAttribute("title", menuInfo.getTitle());
+        model.addAttribute("menuCustomCode", menuInfo);
         model.addAttribute("counsels", counsels);
         model.addAttribute("pages", pages);
         model.addAttribute("searchParamMap", searchParamMap);

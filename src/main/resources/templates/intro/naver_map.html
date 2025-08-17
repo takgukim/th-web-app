@@ -3,13 +3,7 @@
      layout:decorate="~{layouts/default}"
      layout:fragment="content">
 
-    <div class="main-hero">
-        <img th:src="@{/images/sample_banner_01.jpg}" alt="">
-        <div class="hero-caption">
-            <h1>찾아오는 길</h1>
-            <p>티에이치 쇼핑몰 찾아오는 길 안내해드려요.</p>
-        </div>
-    </div>
+    <div th:replace="fragments/menu/header :: menu_header"></div>
 
     <div class="container my-5">
         <div class="section-title">📍 찾아오는 길</div>

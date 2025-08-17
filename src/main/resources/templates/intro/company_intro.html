@@ -87,13 +87,7 @@
     </style>
   </th:block>
 
-  <div class="main-hero">
-    <img th:src="@{/images/sample_banner_01.jpg}" alt="">
-    <div class="hero-caption">
-      <h1>회사소개</h1>
-      <p>티에이치 쇼핑몰에 대해서 소개해드려요.</p>
-    </div>
-  </div>
+  <div th:replace="fragments/menu/header :: menu_header"></div>
 
   <div class="container my-5">
     <h2 class="section-title mb-4">회사 연혁</h2>
