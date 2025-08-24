@@ -29,12 +29,12 @@ public class BoardSearchRequest {
 
     public void setSearchStartDate(String writeDate) {
         LocalDate parsedDate = LocalDate.parse(writeDate);
-        this.searchStartDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        this.searchStartDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public void setSearchEndDate(String writeDate) {
         LocalDate parsedDate = LocalDate.parse(writeDate);
-        this.searchEndDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        this.searchEndDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
 }
