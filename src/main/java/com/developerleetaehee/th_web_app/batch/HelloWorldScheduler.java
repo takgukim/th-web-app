@@ -1,4 +1,4 @@
-package com.developerleetaehee.th_web_app.batch.etc;
+package com.developerleetaehee.th_web_app.batch;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
