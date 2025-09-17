@@ -10,7 +10,7 @@ public class MyDiController {
 
     private final MyWorker myWorker;
 
-    @GetMapping("/aaa")
+    @GetMapping("/di-sample")
     public String aaa() {
         return myWorker.doWork();
     }
