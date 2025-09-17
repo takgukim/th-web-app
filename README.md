@@ -160,9 +160,9 @@ SpringDoc OpenAPI를 통해 자동 생성되는 API 문서를 제공합니다:
 
 ### 브랜치 전략
 - `main`: 메인 브랜치
-- `develop`: 개발 브랜치
-- `feature/*`: 기능 개발 브랜치
-- `hotfix/*`: 긴급 수정 브랜치
+- `dev`: 개발 브랜치
+- `README.md`: README.md를 수정할 때 사용 
+- `{YYYYMMDD}_브랜치`: 신규 기능 개발할때 (공통의 경우 공통주제로 적용)
 
 ## 🤝 기여 방법
 
