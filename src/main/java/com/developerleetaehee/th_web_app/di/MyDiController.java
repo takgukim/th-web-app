@@ -11,7 +11,7 @@ public class MyDiController {
     private final MyWorker myWorker;
 
     @GetMapping("/di-sample")
-    public String aaa() {
+    public String diSample() {
         System.out.println("의존성주입 DI 예제");
         return myWorker.doWork();
     }
