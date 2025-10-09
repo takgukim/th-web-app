@@ -32,17 +32,22 @@ src/
 ├── main/
 │   ├── java/
 │   │   └── com/developerleetaehee/th_web_app/
+│   │       ├── batch/           # 배치
+│   │       │   └── scheduler/   # 스케줄러 모음
 │   │       ├── config/          # 설정 클래스들
 │   │       ├── controller/      # 컨트롤러
 │   │       │   ├── api/        # REST API 컨트롤러
 │   │       │   ├── board/      # 게시판 관련 컨트롤러
 │   │       │   ├── intro/      # 소개 페이지 컨트롤러
 │   │       │   └── shop/       # 쇼핑몰 컨트롤러
+│   │       ├── di/             # 의존성 주입 객체 
 │   │       ├── domain/         # 엔티티 클래스
 │   │       ├── dto/            # 데이터 전송 객체
 │   │       ├── repository/     # 데이터 접근 계층
 │   │       ├── service/        # 비즈니스 로직
-│   │       └── specification/  # JPA 스펙
+│   │       ├── specification/  # JPA 스펙
+│   │       ├── study/          # 스프링부트 Java 학습 코드
+│   │       └── utility/        # 공통 메서드
 │   └── resources/
 │       ├── static/             # 정적 리소스 (CSS, JS, 이미지)
 │       ├── templates/          # Thymeleaf 템플릿
