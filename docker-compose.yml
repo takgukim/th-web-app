@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/th_study_web_app
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: springboot1234Q@
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: th-study-web-app-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: th_study_web_app
+      MYSQL_ROOT_PASSWORD: springboot1234Q@
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: springboot1234Q@
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  mysql-data:
+

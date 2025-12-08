@@ -1,3 +1,4 @@
+# Ubuntu 24.04 기반 OpenJDK 17
 FROM ubuntu:24.04
 
 # 필수 패키지 설치
