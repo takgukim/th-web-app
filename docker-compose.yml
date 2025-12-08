@@ -3,7 +3,7 @@ version: '3.9'
 services:
   app:
     build: .
-    container_name: springboot-web-app
+    container_name: th-study-web-app
     ports:
       - "8080:8080"
     env_file:
