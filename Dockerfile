@@ -1,11 +1,8 @@
 ## Ubuntu 24.04 + OpenJDK 17 (JRE)
 FROM ubuntu:24.04
 
-# 필수 패키지 설치 (JRE만 설치해 용량 절감)
-RUN apt-get update \
-    && apt-get install -y openjdk-17-jre-headless \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# 필수 패키지 설치
+RUN apt-get update && apt-get install -y openjdk-17-jdk && apt-get clean
 
 WORKDIR /app
 
