@@ -3,7 +3,7 @@ version: '3.9'
 services:
   app:
     build: .
-    container_name: springboot-app
+    container_name: springboot-web-app
     ports:
       - "8080:8080"
     env_file:
@@ -28,11 +28,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
 volumes:
   mysql-data:
 
