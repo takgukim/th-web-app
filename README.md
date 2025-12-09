@@ -36,14 +36,18 @@ th-web-app/
 │   └── main/
 │       ├── java/
 │       │   └── com/developerleetaehee/th_web_app/
-│       │       ├── batch/           # 배치
-│       │       │   └── scheduler/   # 스케줄러 모음
-│       │       ├── config/          # 설정 클래스들
-│       │       ├── controller/      # 컨트롤러
-│       │       │   ├── api/        # REST API 컨트롤러
-│       │       │   ├── board/      # 게시판 관련 컨트롤러
-│       │       │   ├── intro/      # 소개 페이지 컨트롤러
-│       │       │   └── shop/       # 쇼핑몰 컨트롤러
+│       │       ├── batch/             # 배치
+│       │       │   └── scheduler/     # 스케줄러 모음
+│       │       ├── config/            # 설정 클래스들
+│       │       ├── controller/        # 컨트롤러
+│       │       │   ├── api/           # 외부 API 컨트롤러
+│       │       │   ├── board/         # 게시판 관련 컨트롤러
+│       │       │   ├── intro/         # 소개 페이지 컨트롤러
+│       │       │   ├── lof/           # 로그 테스트
+│       │       │   ├── shop/          # 쇼핑몰 컨트롤러
+│       │       │   ├── test/          # 테스트
+│       │       │   ├── user/          # 회원정보
+│       │       │   └── HomeController # 메인화면 index
 │       │       ├── di/             # 의존성 주입 객체 
 │       │       ├── domain/         # 엔티티 클래스
 │       │       ├── dto/            # 데이터 전송 객체
@@ -122,8 +126,8 @@ cd th-web-app
 # JAR 파일 빌드
 ./gradlew build
 
-# JAR 파일 실행
-java -jar build/libs/th-web-app-1.0.jar
+# JAR 파일 실행 (운영 prod, 개발 dev, 로컬 local, 도커 docker)
+java -jar -Dspring.profiles.active=local build/libs/th-web-app-1.0.jar
 ```
 
 ### 4. 접속
