@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   datasource:
     url: jdbc:mysql://${DB_HOST}/th_study_web_app?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: ${DB_USERNAME}
@@ -29,7 +31,6 @@ mybatis:
   type-aliases-package: com.developerleetaehee.th_web_app.domain
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 #네이버 지도 API 연동 정보
 naver:
   map:
@@ -38,7 +39,7 @@ naver:
     company-lng: ${NAVER_MAP_LNG}
 # 로그
 log:
-  folder: ./logs
+  dir: ${LOG_DIR:${user.home}/logs/app}
 # cors 적용
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS}
