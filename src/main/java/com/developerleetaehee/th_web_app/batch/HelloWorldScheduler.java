@@ -14,13 +14,16 @@ public class HelloWorldScheduler {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    @Value("${log.folder:logs}") // 기본값 logs
+    @Value("${LOGGING_FOLDER:${user.home}/logs/batch}") // 기본값 logs
     private String logFolder;
 
     @Scheduled(cron = "${scheduler.hello-world-cron}")
     public void writeHelloWorld() {
+
+        System.out.println("System.out.println()도 도커, 서버에서 잘 작동해요. 100");
+
         String date = LocalDate.now().format(DATE_FORMATTER);
-        String fileName = logFolder + "/batch/hello_world_" + date + ".log";
+        String fileName = this.logFolder + "/hello_world_" + date + ".log";
 
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.write("Hello_world_" + date + System.lineSeparator());
