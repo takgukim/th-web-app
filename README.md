@@ -1,6 +1,6 @@
-# TH Web Application
+# 티에이치 문서관리 웹 애플리케이션
 
-Spring Boot 기반의 웹 애플리케이션 프로젝트입니다. 게시판, 상담, 네이버 지도 API 연동 등의 기능을 제공합니다.
+Spring Boot 기반의 웹 애플리케이션 프로젝트입니다. 게시판, 네이버 지도 API 연동 등의 기능을 제공합니다.
 
 ## 🚀 기술 스택
 
@@ -59,7 +59,12 @@ th-web-app/
 │       └── resources/
 │           ├── static/             # 정적 리소스 (CSS, JS, 이미지)
 │           ├── templates/          # Thymeleaf 템플릿
-│           └── mapper/             # MyBatis XML 매퍼
+│           ├── mapper/             # MyBatis XML 매퍼
+│           ├── application.yml     # 스프링부트 설정 파일
+│           ├── logback-spring.xml  # 환경에 따른 로그 설정 분리
+│           ├── logback-docker.xml  # 도커 로그 설정 
+│           └── logback-local.xml   # 로컬 로그 설정
+├── README.md    웹 프로젝트 설명 
 └── build.gradle 등 Gradle 설정 파일
 ```
 
