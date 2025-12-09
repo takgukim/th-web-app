@@ -23,8 +23,8 @@ public class LogController {
     public String loggerTest(Model model) {
 
         logger.info("도커 로그 테스트 100");
-        logger.info("도커 로크 테스트 200");
-        logger.info("도커 로크 테스트 300");
+        logger.info("도커 로그 테스트 200");
+        logger.info("도커 로그 테스트 300");
 
         MenuInfo menuInfo = menuCustomCode.getCode().get("log_logger_test");
 
